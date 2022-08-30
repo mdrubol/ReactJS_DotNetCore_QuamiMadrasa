@@ -2,6 +2,7 @@
 using QuamiMadrasa.Controllers;
 using System.Collections.Generic;
 
+#nullable disable
 namespace QuamiMadrasa.Errors
 {
     public class APIValidationErrorResponce : APIResponce

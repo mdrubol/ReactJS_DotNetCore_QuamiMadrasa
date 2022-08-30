@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using QuamiMadrasa.Controllers.Extensions;
 using QuamiMadrasa.Infrastracture.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +11,8 @@ IConfigurationRoot configuration = new ConfigurationBuilder()
        .Build();
 // Add services to the container.
 builder.Services.AddDbContext<QuamiMadrasaDBContext>(options =>
-options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")),ServiceLifetime.Singleton);
+builder.Services.AddApplicationServices();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

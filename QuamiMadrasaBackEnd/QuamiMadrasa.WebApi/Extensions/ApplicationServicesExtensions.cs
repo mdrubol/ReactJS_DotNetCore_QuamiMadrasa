@@ -8,6 +8,7 @@ using QuamiMadrasa.Infrastracture.Repositories;
  
 using System.Linq;
 
+#nullable disable
 namespace QuamiMadrasa.Controllers.Extensions
 {
     public static class ApplicationServicesExtensions

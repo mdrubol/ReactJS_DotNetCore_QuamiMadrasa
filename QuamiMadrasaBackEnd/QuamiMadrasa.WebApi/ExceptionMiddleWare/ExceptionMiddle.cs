@@ -6,7 +6,7 @@ using System;
 using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
-
+#nullable disable
 namespace QuamiMadrasa.ExceptionMiddleWare
 {
     public class ExceptionMiddle

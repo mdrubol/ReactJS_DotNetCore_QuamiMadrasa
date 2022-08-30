@@ -1,4 +1,5 @@
-﻿namespace QuamiMadrasa.Errors
+﻿#nullable disable
+namespace QuamiMadrasa.Errors
 {
     public class APIException : APIResponce
     {

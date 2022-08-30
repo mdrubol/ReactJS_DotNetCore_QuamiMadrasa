@@ -6,7 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-
+#nullable disable
 namespace QuamiMadrasa.Infrastracture.Data
 {
     public class UnitOfWork : IUnitOfWork

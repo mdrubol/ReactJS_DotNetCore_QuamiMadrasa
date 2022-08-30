@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Security.Claims;
 
+#nullable disable
 namespace QuamiMadrasa.Extensions
 {
     public static class ClaimsPrincipalExtensions
