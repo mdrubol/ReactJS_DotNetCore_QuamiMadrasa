@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using QuamiMadrasa.Application.CustomServices;
+using QuamiMadrasa.Application.ICustomServices;
 using QuamiMadrasa.Core.Interfaces;
 using QuamiMadrasa.Errors;
 using QuamiMadrasa.Infrastracture.Data;
@@ -17,11 +18,9 @@ namespace QuamiMadrasa.Controllers.Extensions
         {
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<QuamiMadrasaDBContext, QuamiMadrasaDBContext>();
-            //services.AddScoped<StoreContextSeed, StoreContextSeed>();
-            //services.AddScoped<IProductRepository, ProductRepository>();
-            //services.AddScoped<ICustomerBasket, BasketRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            //services.AddScoped<IOrderService, OrderService>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.Configure<ApiBehaviorOptions>(options =>
               options.InvalidModelStateResponseFactory = ActionContext =>

@@ -11,21 +11,21 @@ namespace QuamiMadrasa.Infrastracture.Data
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly QuamiMadrasaDBContext _storeContext;
+        private readonly QuamiMadrasaDBContext _quamiMadrasaContext;
         private Hashtable _repositories;
 
-        public UnitOfWork(QuamiMadrasaDBContext storeContext)
+        public UnitOfWork(QuamiMadrasaDBContext quamiMadrasaContext)
         {
-            _storeContext = storeContext;
+            _quamiMadrasaContext = quamiMadrasaContext;
         }
         public async Task<int> Complete()
         {
-            return await _storeContext.SaveChangesAsync();
+            return await _quamiMadrasaContext.SaveChangesAsync();
         }
 
         public void Dispose()
         {
-            _storeContext.Dispose();
+            _quamiMadrasaContext.Dispose();
         }
 
         public IGenericRepository<TEntity> repository<TEntity>() where TEntity : BaseEntity
@@ -36,7 +36,7 @@ namespace QuamiMadrasa.Infrastracture.Data
             {
                 var repositiryType = typeof(GenericRepository<>);
                 var repositoryInstance = Activator.CreateInstance(
-                    repositiryType.MakeGenericType(typeof(TEntity)),_storeContext);
+                    repositiryType.MakeGenericType(typeof(TEntity)),_quamiMadrasaContext);
                 _repositories.Add(Type, repositoryInstance);
             }
             return (IGenericRepository<TEntity>)_repositories[Type];
