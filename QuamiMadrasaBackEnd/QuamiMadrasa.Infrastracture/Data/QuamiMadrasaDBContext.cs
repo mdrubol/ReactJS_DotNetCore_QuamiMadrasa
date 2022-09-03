@@ -18,7 +18,7 @@ namespace QuamiMadrasa.Infrastracture.Data
         }
 
         DbSet<BloodGroup> BloodGroups { get; set; }
-        DbSet<ClassType> ClassType { get; set; }    
+        DbSet<ClassType> ClassType { get; set; }
         DbSet<EmployeeType> EmployeeTypes { get; set; }
         DbSet<Exam> Exams { get; set; }
         DbSet<ExamRecord> ExamRecords { get; set; }
@@ -26,14 +26,14 @@ namespace QuamiMadrasa.Infrastracture.Data
         DbSet<Hostel> Hostels { get; set; }
         DbSet<Mark> Marks { get; set; }
         DbSet<MyClass> Classes { get; set; }
-        DbSet<Nationality> Nationalities { get; set; }  
+        DbSet<Nationality> Nationalities { get; set; }
         DbSet<Payment> Payments { get; set; }
         DbSet<PaymentDetail> PaymentDetails { get; set; }
         DbSet<Promotion> Promotions { get; set; }
         DbSet<Receipt> Receipts { get; set; }
         DbSet<Section> Sections { get; set; }
         DbSet<Setting> Settings { get; set; }
-        DbSet<Staff> Staffs { get; set; }   
+        DbSet<Staff> Staffs { get; set; }
         DbSet<Student> Students { get; set; }
         DbSet<Subject> Subjects { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -45,6 +45,32 @@ namespace QuamiMadrasa.Infrastracture.Data
                 .HasOne(t => t.Teacher)
                 .WithOne();
 
+            modelBuilder.Entity<IdentityRole<int>>().HasData(
+                new IdentityRole<int> { Id = 1, Name = "Admin", NormalizedName = "Administrator", ConcurrencyStamp = Guid.NewGuid().ToString() },
+                new IdentityRole<int> { Id = 2, Name = "Teacher", NormalizedName = "Teacher", ConcurrencyStamp = Guid.NewGuid().ToString() },
+                new IdentityRole<int> { Id = 3, Name = "Accountant", NormalizedName = "Accountant", ConcurrencyStamp = Guid.NewGuid().ToString() }
+                );
+            modelBuilder.Entity<IdentityUser<int>>().HasData(
+                new IdentityUser<int> { Id = 1, UserName = "Admin", ConcurrencyStamp=Guid.NewGuid().ToString(), Email="admin@madrasha.com", EmailConfirmed=true, NormalizedEmail= "admin@madrasha.com", NormalizedUserName="Admin" ,
+                    PasswordHash= "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9" 
+                    //admin123
+                },
+                new IdentityUser<int> { Id = 2, UserName = "teacher01", ConcurrencyStamp = Guid.NewGuid().ToString(), Email = "teacher01@madrasha.com", EmailConfirmed = true, NormalizedEmail = "teacher01@madrasha.com",
+                    PasswordHash = "cde383eee8ee7a4400adf7a15f716f179a2eb97646b37e089eb8d6d04e663416" 
+                    //teacher123
+                },
+                new IdentityUser<int> { Id = 3, UserName = "accountant01", ConcurrencyStamp = Guid.NewGuid().ToString(), Email = "accountant01@madrasha.com", EmailConfirmed = true, NormalizedEmail = "accountant01@madrasha.com",
+                    PasswordHash = "4d393ec34c3c6a875b95e66df5e6d6fc09efc33d66f12e3e98afca347d6b7638"
+                } //accountant123
+            );
+
+            modelBuilder.Entity<IdentityUserRole<int>>().HasData(
+            new IdentityUserRole<int> { RoleId = 1, UserId = 1 },
+            new IdentityUserRole<int> { RoleId = 2, UserId = 1 },
+            new IdentityUserRole<int> { RoleId = 3, UserId = 1 },
+            new IdentityUserRole<int> { RoleId = 2, UserId = 2 },
+            new IdentityUserRole<int> { RoleId = 3, UserId = 3 }
+            );
 
         }
 

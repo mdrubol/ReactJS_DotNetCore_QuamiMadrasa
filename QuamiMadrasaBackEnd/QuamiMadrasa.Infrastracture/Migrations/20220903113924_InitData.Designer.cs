@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuamiMadrasa.Infrastracture.Data;
 
@@ -11,9 +12,10 @@ using QuamiMadrasa.Infrastracture.Data;
 namespace QuamiMadrasa.Infrastracture.Migrations
 {
     [DbContext(typeof(QuamiMadrasaDBContext))]
-    partial class QuamiMadrasaDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220903113924_InitData")]
+    partial class InitData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -60,7 +60,13 @@ namespace QuamiMadrasa.WebApi.Controllers
                 var response = new TokenResponse()
                 {
                     AccessToken = new JwtSecurityTokenHandler().WriteToken(token),
-                    ExpiresOnUtc = token.ValidTo
+                    ExpiresOnUtc = token.ValidTo,
+                    User = new CurrentUser {
+                        UserId = loginUser.Id,
+                        Email = loginUser.Email, 
+                        UserName=loginUser.UserName,
+                        Roles= userRoles.Select(r=> r.Name).ToList()
+                    }
                 };
 
                 return Ok(response);

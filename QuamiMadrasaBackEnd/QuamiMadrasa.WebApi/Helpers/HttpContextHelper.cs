@@ -1,12 +1,13 @@
-﻿namespace QuamiMadrasa.WebApi.Helpers
+﻿#nullable disable
+namespace QuamiMadrasa.WebApi.Helpers
 {
     public static class HttpContextHelper
     {
-        private static IHttpContextAccessor _httpContextAccessor;
+        public static readonly IHttpContextAccessor _httpContextAccessor;
 
-        public static void Configure(IHttpContextAccessor httpContextAccessor)
+        static HttpContextHelper()
         {
-            _httpContextAccessor = httpContextAccessor;
+            _httpContextAccessor = new HttpContextAccessor();
         }
 
         public static HttpContext HttpContext => _httpContextAccessor.HttpContext;

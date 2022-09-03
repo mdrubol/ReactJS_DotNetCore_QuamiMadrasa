@@ -10,5 +10,6 @@ namespace QuamiMadrasa.WebApi.DTOs
     {
         public string AccessToken { get; set; }
         public DateTime ExpiresOnUtc { get; set; }
+        public CurrentUser User { get; set; }
     }
 }

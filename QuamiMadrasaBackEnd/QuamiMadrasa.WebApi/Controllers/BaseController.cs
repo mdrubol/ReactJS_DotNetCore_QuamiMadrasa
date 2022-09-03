@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using QuamiMadrasa.WebApi.DTOs;
 using QuamiMadrasa.WebApi.Helpers;
 using System.Security.Claims;
+#nullable disable
 
 namespace QuamiMadrasa.WebApi.Controllers
 {
@@ -12,11 +13,12 @@ namespace QuamiMadrasa.WebApi.Controllers
     {
         public CurrentUser CurrentUser { get { return this.currentUser; } }
         private CurrentUser currentUser = null;
+        public readonly IHttpContextAccessor _httpContextAccessor;
 
         public BaseController()
         {
-
-            var identity = HttpContextHelper.HttpContext.User.Identity as ClaimsIdentity;
+            _httpContextAccessor = HttpContextHelper._httpContextAccessor;   
+            var identity = _httpContextAccessor.HttpContext.User.Identity as ClaimsIdentity;
 
             if (identity != null && identity.Claims != null && identity.Claims.Any())
             {
@@ -26,7 +28,7 @@ namespace QuamiMadrasa.WebApi.Controllers
                 currentUser.UserName = identity.FindFirst("UserName").Value;
                 currentUser.Email = identity.FindFirst("Email").Value;
             }
-
+            
         }
     }
 }
