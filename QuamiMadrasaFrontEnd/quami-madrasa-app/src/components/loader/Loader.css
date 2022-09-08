@@ -1,0 +1,77 @@
+/*Text Loader Animation*/
+.ui-text-loader .letter {
+  display: inline-block;
+  font-size: 1rem;
+  color: gray;
+}
+.ui-text-loader.text-dark .letter {
+  color: #000;
+}
+.ui-text-loader.text-blue .letter {
+  color: #1a428a;
+}
+.ui-text-loader.text-green .letter {
+  color: #4a9463;
+}
+.ui-text-loader.text-red .letter {
+  color: #d9534f;
+}
+.ui-text-loader.text-yellow .letter {
+  color: #f8bf00;
+}
+
+.ui-text-loader .letter {
+  animation-name: textloading;
+  animation-duration: 1.6s;
+  animation-iteration-count: infinite;
+  animation-direction: initial;
+}
+
+.ui-text-loader .l-1 {
+  animation-delay: 0.48s;
+}
+
+.ui-text-loader .l-2 {
+  animation-delay: 0.6s;
+}
+
+.ui-text-loader .l-3 {
+  animation-delay: 0.72s;
+}
+
+.ui-text-loader .l-4 {
+  animation-delay: 0.84s;
+}
+
+.ui-text-loader .l-5 {
+  animation-delay: 0.96s;
+}
+
+.ui-text-loader .l-6 {
+  animation-delay: 1.08s;
+}
+
+.l-7 {
+  animation-delay: 1.2s;
+}
+
+.ui-text-loader .l-8 {
+  animation-delay: 1.32s;
+}
+
+.ui-text-loader .l-9 {
+  animation-delay: 1.44s;
+}
+
+.ui-text-loader.l-10 {
+  animation-delay: 1.56s;
+}
+
+@keyframes textloading {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

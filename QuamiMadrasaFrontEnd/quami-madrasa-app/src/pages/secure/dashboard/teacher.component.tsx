@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import UserService from "../services/user.service";
-export default class Home extends Component<any,any> {
+import UserService from "../../../services/user.service";
+export default class BoardUser extends Component<any,any> {
   constructor(props:any) {
     super(props);
     this.state = {
@@ -8,7 +8,7 @@ export default class Home extends Component<any,any> {
     };
   }
   componentDidMount() {
-    UserService.getPublicContent().then(
+    UserService.getModeratorBoard().then(
       response => {
         this.setState({
           content: response.data
@@ -17,7 +17,9 @@ export default class Home extends Component<any,any> {
       error => {
         this.setState({
           content:
-            (error.response && error.response.data) ||
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
             error.message ||
             error.toString()
         });

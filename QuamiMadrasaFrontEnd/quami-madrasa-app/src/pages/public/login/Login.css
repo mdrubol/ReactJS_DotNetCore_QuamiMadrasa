@@ -1,0 +1,14 @@
+.login-panel {
+  width: 400px;
+  margin: auto;
+  margin-top: 10%;
+  overflow: hidden;
+}
+.login-image {
+  padding: 5px;
+  font-size: 56px;
+  text-align: center;
+  background-color: var(--light-color);
+  border-bottom: 1px solid var(--gray-ligt-color);
+  color: var(--bs-gray);
+}

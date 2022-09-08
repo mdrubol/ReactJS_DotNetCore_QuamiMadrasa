@@ -27,3 +27,36 @@ label {
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
+
+:root {
+  /*Background color*/
+  --primary-color: #0048bb;
+  --primary-alt-color: #0048bb;
+  --dark-color: #212529;
+  --dark-light-color: #5c636a;
+  --white-color: #fff;
+  --light-color: #f7f8f9;
+  --gray-ligt-color: #eee;
+
+  /*Text color*/
+  --text-primary-color: #012d75;
+
+  /*Text size*/
+  --heading-text-size: 22px;
+  --sub-heading-text-size: 18px;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  color: var(--text-primary-color);
+}
+.link {
+  color: var(--text-primary-color);
+  cursor: pointer;
+}
+.link:hover {
+  color: var(--bs-gray);
+}
+.add-cursor {
+  cursor: pointer;
+}

@@ -1,0 +1,22 @@
+.navbar-brand {
+  font-size: 22px;
+  background-color: var(--gray-ligt-color);
+  color: var(--text-primary-color);
+  text-transform: uppercase;
+  padding: 10px 15px;
+}
+.navbar-brand:hover {
+  color: var(--text-primary-color);
+}
+.navbar.bg-light {
+  padding: 0;
+}
+.navbar.bg-light .nav-link {
+  padding: 15px 25px;
+  color: var(--dark-color);
+}
+.navbar.bg-light .nav-link:hover,
+.navbar.bg-light .nav-link.active {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
