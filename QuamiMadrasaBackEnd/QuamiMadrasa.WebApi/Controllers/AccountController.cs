@@ -11,6 +11,7 @@ using System.Security.Claims;
 
 namespace QuamiMadrasa.WebApi.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class AccountController : BaseController

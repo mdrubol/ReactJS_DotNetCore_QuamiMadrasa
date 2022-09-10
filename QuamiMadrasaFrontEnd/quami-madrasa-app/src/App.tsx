@@ -4,6 +4,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "./App.css";
 import AuthService from "./services/auth.service";
 import ClientsRoutes from "./routes/Routes";
+import * as Icon from 'react-bootstrap-icons';
 
 
 class App extends Component<any, any> {
@@ -11,8 +12,8 @@ class App extends Component<any, any> {
     super(props);
     this.logOut = this.logOut.bind(this);
     this.state = props = {
-      showModeratorBoard: false,
       showAdminBoard: false,
+      showTeacherBoard: false,
       showAccountDashboard:false,
       currentUser: undefined
     };
@@ -22,8 +23,8 @@ class App extends Component<any, any> {
     if (user) {
       this.setState({
         currentUser: user,
-        showModeratorBoard: user.roles.includes("Teacher"),
         showAdminBoard: user.roles.includes("Admin"),
+        showTeacherBoard: user.roles.includes("Teacher"),
         showAccountDashboard: user.roles.includes("Accountant")
       });
     }

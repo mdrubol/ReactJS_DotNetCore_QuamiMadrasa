@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QuamiMadrasa.WebApi.DTOs;
 using QuamiMadrasa.WebApi.Helpers;
@@ -7,7 +8,7 @@ using System.Security.Claims;
 
 namespace QuamiMadrasa.WebApi.Controllers
 {
-
+    [EnableCors]
     [ApiController]
     public class BaseController : ControllerBase
     {

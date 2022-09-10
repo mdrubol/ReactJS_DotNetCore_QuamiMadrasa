@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component, FormEvent } from "react";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
@@ -8,45 +8,28 @@ import { Link } from "react-router-dom";
 import AuthService from "../../../services/auth.service";
 import { useNavigate } from "react-router-dom";
 
-export default class Login extends React.Component<any, any> {
+interface LoginForm{
+  username: string,
+  password: string,
+  loading: boolean,
+  message: string
+}
 
-  constructor(props: any) {
-    super(props);
-    this.handleLogin = this.handleLogin.bind(this);
-    this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
+ export default function Login() {
 
+  let navigate = useNavigate();
+  let [error, setError] = React.useState(null);
 
-    this.state = {
-      username: "",
-      password: "",
-      loading: false,
-      message: ""
-    };
-  }
-
-  onChangeUsername(e: { target: { value: any; }; }) {
-    this.setState({
-      username: e.target.value
-    });
-  }
-  onChangePassword(e: { target: { value: any; }; }) {
-    this.setState({
-      password: e.target.value
-    });
-  }
-  handleLogin(e: { preventDefault: () => void; }) {
+  const handleLogin = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    this.setState({
-      message: "",
-      loading: true
-    });
 
+    const formData = new FormData(e.currentTarget),
+          formDataObj = Object.fromEntries(formData.entries())
+    console.log("submitted",formDataObj)
 
-    AuthService.login(this.state.username, this.state.password).then(
+    AuthService.login(formDataObj.username,formDataObj.password).then(
       () => {
-        let navigate = useNavigate();
-        navigate("/profile", { replace: true });
+          setError(null);
       },
       error => {
         const resMessage =
@@ -55,15 +38,18 @@ export default class Login extends React.Component<any, any> {
             error.response.data.message) ||
           error.message ||
           error.toString();
-        this.setState({
-          loading: false,
-          message: resMessage
-        });
+             
+          setError(resMessage);
       }
     );
 
+    if(error == null)
+    {
+      navigate(AuthService.getUserDashboardPath(), { replace: true });
+    }
+
   }
-  render() {
+
   return (
     <div className="container py-3">
       <Card className="login-panel">
@@ -71,29 +57,26 @@ export default class Login extends React.Component<any, any> {
           <i className="bi bi-shield-lock"></i>
         </div>
         <Card.Body className="py-4">
-          <Form>
+          <Form onSubmit={handleLogin}>
             <InputGroup className="mb-3">
               <InputGroup.Text id="username">
                 <i className="bi bi-person"></i>
               </InputGroup.Text>
-              <Form.Control name="username" placeholder="Username" />
+              <Form.Control name="username" type="text"  placeholder="ব্যবহারকারীর নাম" />
             </InputGroup>
             <InputGroup className="mb-3">
               <InputGroup.Text id="password">
                 <i className="bi bi-lock"></i>
               </InputGroup.Text>
-              <Form.Control name="password" placeholder="Password" />
+              <Form.Control name="password" type="password"  placeholder="পাসওয়ার্ড" />
             </InputGroup>
-          </Form>
-          <div className="">
-            <Button variant="primary">
-              <i className="bi bi-patch-check"></i> Login
+            <Button type="submit"  variant="primary">
+              <i className="bi bi-patch-check"></i> লগইন
             </Button>
-            <span className="mx-2 link">Forgot password?</span>
-          </div>
+            <span className="mx-2 link">পাসওয়ার্ড ভুলে গেছেন?</span>
+          </Form>
         </Card.Body>
       </Card>
     </div>
   );
-  }
-};
+  };

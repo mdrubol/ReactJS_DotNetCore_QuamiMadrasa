@@ -61,8 +61,8 @@ const SecureHeader = () => {
               </NavDropdown>
             </Nav>
             <div className="d-flex">
-              <Button variant="secondary" onClick={goToLoginPage}>
-                Logout <i className="bi bi-box-arrow-in-right"></i>
+              <Button variant="primary" onClick={goToLoginPage}>
+               সাইন আউট <i className="bi bi-box-arrow-in-right"></i>
               </Button>
             </div>
           </Navbar.Collapse>

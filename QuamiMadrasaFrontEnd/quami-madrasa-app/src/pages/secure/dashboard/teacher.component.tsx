@@ -8,7 +8,7 @@ export default class BoardUser extends Component<any,any> {
     };
   }
   componentDidMount() {
-    UserService.getModeratorBoard().then(
+    UserService.getTeacherBoard().then(
       response => {
         this.setState({
           content: response.data
