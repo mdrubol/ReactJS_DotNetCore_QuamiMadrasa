@@ -8,10 +8,12 @@ import { useNavigate } from "react-router-dom";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import "../header/Header.css";
 import { NavLink } from "react-router-dom";
+import authService from "../../services/auth.service";
 
 const SecureHeader = () => {
   const navigate = useNavigate();
   const goToLoginPage = () => {
+    authService.logout();
     navigate("/");
   };
   const [show, setShow] = useState(false);

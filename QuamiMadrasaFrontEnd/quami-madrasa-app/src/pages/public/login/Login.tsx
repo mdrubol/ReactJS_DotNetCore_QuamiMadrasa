@@ -24,10 +24,9 @@ interface LoginForm{
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget),
-          formDataObj = Object.fromEntries(formData.entries())
-    console.log("submitted",formDataObj)
+          formDataObj = Object.fromEntries(formData.entries());
 
-    AuthService.login(formDataObj.username,formDataObj.password).then(
+/*     AuthService.login(formDataObj.username,formDataObj.password).then(
       () => {
           setError(null);
       },
@@ -41,12 +40,20 @@ interface LoginForm{
              
           setError(resMessage);
       }
-    );
+    ); */
 
-    if(error == null)
+    AuthService.login(formDataObj.username,formDataObj.password).then((data:any)=>{
+      console.log(data);
+      if (data && data.accessToken) {
+        localStorage.setItem("user_token", JSON.stringify(data));
+        navigate(AuthService.getUserDashboardPath(), { replace: true });
+      }
+    });
+
+/*     if(error == null)
     {
       navigate(AuthService.getUserDashboardPath(), { replace: true });
-    }
+    } */
 
   }
 
