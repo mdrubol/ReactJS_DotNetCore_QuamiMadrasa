@@ -10,6 +10,7 @@ export default class Home extends React.Component<any,any> {
       content: ""
     };
   }
+  
   componentDidMount() {
     UserService.getPublicContent().then(
       response => {

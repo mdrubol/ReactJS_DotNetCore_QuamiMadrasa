@@ -1,3 +1,7 @@
+.sidenav-col {
+  background: rgb(195, 232, 247);
+  color:#f7f7f7;
+}
 
 label {
   display: block;

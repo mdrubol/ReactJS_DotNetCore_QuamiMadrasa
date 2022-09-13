@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 import "../header/Header.css";
 import { NavLink } from "react-router-dom";
+import authService from "../../services/auth.service";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -17,51 +18,76 @@ const Header = () => {
     navigate("/login");
   };
 
+  const isLoggedIn = () => {
+    if (localStorage.getItem("user_token")) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light-" expand="lg">
       <Container fluid>
         <Navbar.Brand>কওমি মাদ্রাসা</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={NavLink} to="/">
-            <i className="bi bi-house"></i> 
+              <i className="bi bi-house"></i>
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/contact">
-            আমাদের সম্পর্কে
+            {
+            isLoggedIn()?
+            <Nav.Link as={NavLink} to="/admin-dashboard">
+              Dashboard
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/contact">
-            কার্যক্রম
+            :
+            null
+            }
+
+            <Nav.Link as={NavLink} to="/contact2">
+              আমাদের সম্পর্কে
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/contact">
-            প্রতিবেদন
+            <Nav.Link as={NavLink} to="/contact3">
+              কার্যক্রম
             </Nav.Link>
             <NavDropdown title="ফর্ম সমূহ" id="basic-nav-dropdown">
               <NavDropdown.Item as={NavLink} to="/SS">
-              ভর্তি ফরম
+                ভর্তি ফরম
               </NavDropdown.Item>
               <NavDropdown.Item as={NavLink} to="/SSS">
-              পুনঃ ভর্তি ফরম
+                পুনঃ ভর্তি ফরম
               </NavDropdown.Item>
               <NavDropdown.Item as={NavLink} to="/SSSS">
-              একটা ফরম
+                একটা ফরম
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link as={NavLink} to="/contact">
-            নোটিশ বোর্ড
+            <Nav.Link as={NavLink} to="/contact4">
+              নোটিশ বোর্ড
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/contact">
-            রেজাল্ট আর্কাইভ
+            <Nav.Link as={NavLink} to="/contact5">
+              রেজাল্ট আর্কাইভ
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/contact">
-            যোগাযোগ
+            <Nav.Link as={NavLink} to="/contact6">
+              যোগাযোগ
             </Nav.Link>
 
           </Nav>
           <div className="d-flex">
-            <Button variant="primary" onClick={goToLoginPage}>
-             লগইন <i className="bi bi-box-arrow-in-right"></i>
-            </Button>
+
+            {
+              isLoggedIn() ?
+                <Button variant="primary" onClick={authService.logout}>
+                  সাইন আউট <i className="bi bi-box-arrow-in-right"></i>
+                </Button>
+                :
+                <Button variant="primary" onClick={goToLoginPage}>
+                  লগইন <i className="bi bi-box-arrow-in-right"></i>
+                </Button>
+            }
+
+
           </div>
         </Navbar.Collapse>
       </Container>

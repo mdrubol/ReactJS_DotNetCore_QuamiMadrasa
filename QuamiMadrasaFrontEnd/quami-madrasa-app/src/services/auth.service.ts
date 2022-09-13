@@ -1,6 +1,7 @@
 import axios from "axios";
 const API_URL = "https://localhost:7291/api/Account/";
 class AuthService {
+
   login(username: any, password: any) {
     return axios
       .post(API_URL + "Authenticate", {
@@ -13,6 +14,7 @@ class AuthService {
   }
   logout() {
     localStorage.removeItem("user_token");
+
   }
   register(username: any, email: any, password: any) {
     return axios.post(API_URL + "signup", {
@@ -53,5 +55,13 @@ class AuthService {
       return '/profile';
     }
   }
+
+  isLoggedIn = () =>{
+    if(localStorage.getItem('user_token'))
+    return true;
+    else
+    return false;
+  }
+
 }
 export default new AuthService();
