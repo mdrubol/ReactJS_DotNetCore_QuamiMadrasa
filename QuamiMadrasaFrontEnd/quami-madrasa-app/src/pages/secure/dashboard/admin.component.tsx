@@ -1,38 +1,69 @@
-import React, { Component } from "react";
+import React, { Component, useContext, useState } from "react";
 import UserService from "../../../services/user.service";
-export default class BoardUser extends Component<any,any> {
-  constructor(props:any) {
-    super(props);
-    this.state = {
-      content: ""
-    };
-  }
-  componentDidMount() {
-    UserService.getAdminBoard().then(
-      response => {
-        this.setState({
-          content: response.data
-        });
-      },
-      error => {
-        this.setState({
-          content:
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString()
-        });
-      }
-    );
-  }
-  render() {
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import {Navigation} from 'react-minimal-side-navigation';
+import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
+import Icon from "../../../components/Icon/Icon";
+import { UserContext } from "../../../layout/DashboardLayout";
+
+const  Admin=(props:any) => {
+
+  const { dashboardContext, setDashboardContext } = useContext(UserContext);
+    
+
+
     return (
-      <div className="container py-3">
-        <header className="page-title">
-          <h3>{this.state.content}</h3>
-        </header>
-      </div>
+      <Container  fluid>
+        <Row>
+            <Col hidden={dashboardContext.showSidebar} sm="2"> 
+            <Navigation
+            // you can use your own router's api to get pathname
+            activeItemId="/management/members"
+            onSelect={({itemId}) => {
+              // maybe push to the route
+            }}
+            items={[
+              {
+                title: 'Dashboard',
+                itemId: '/dashboard',
+                // you can use your own custom Icon component as well
+                // icon is optional
+                elemBefore: () => <Icon name="bi-inbox" />,
+              },
+              {
+                title: 'Management',
+                itemId: '/management',
+                elemBefore: () => <Icon name="bi-house" />,
+                subNav: [
+                  {
+                    title: 'Projects',
+                    itemId: '/management/projects',
+                  },
+                  {
+                    title: 'Members',
+                    itemId: '/management/members',
+                  },
+                ],
+              },
+              {
+                title: 'Another Item',
+                itemId: '/another',
+                subNav: [
+                  {
+                    title: 'Teams',
+                    itemId: '/management/teams',
+                  },
+                ],
+              },
+            ]}
+          />
+          </Col>
+            <Col sm="10">Body</Col>
+        </Row>
+      </Container>
     );
   }
-}
+
+export default Admin;

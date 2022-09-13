@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import UserService from "../../../services/user.service";
-export default class BoardUser extends Component<any,any> {
+
+export default class AccounttantDashboard extends Component<any,any> {
   constructor(props:any) {
     super(props);
     this.state = {
