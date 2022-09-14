@@ -44,7 +44,7 @@ const Header = () => {
             </Nav.Link>
             {
             isLoggedIn()?
-            <Nav.Link as={NavLink} to="/admin-dashboard">
+            <Nav.Link as={NavLink} to={authService.getUserDashboardPath()}>
               Dashboard
             </Nav.Link>
             :
@@ -83,7 +83,7 @@ const Header = () => {
 
             {
               isLoggedIn() ?
-                <Button variant="primary" onClick={authService.logout}>
+                <Button variant="primary" onClick={logoutNow}>
                   সাইন আউট <i className="bi bi-box-arrow-in-right"></i>
                 </Button>
                 :

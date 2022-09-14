@@ -43,10 +43,10 @@ interface LoginForm{
     ); */
 
     AuthService.login(formDataObj.username,formDataObj.password).then((data:any)=>{
-      console.log(data);
       if (data && data.accessToken) {
         localStorage.setItem("user_token", JSON.stringify(data));
-        navigate(AuthService.getUserDashboardPath(), { replace: true });
+        let path = AuthService.getUserDashboardPath();
+        navigate(path, { replace: true });
       }
     });
 

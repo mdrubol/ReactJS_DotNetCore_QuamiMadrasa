@@ -25,6 +25,8 @@ const AccountantDashboard = React.lazy(() =>
 const Profile = React.lazy(() => import("../pages/secure/profile/profile.component"))
 const Data = React.lazy(() => import("../pages/secure/data/Data"));
 const Table = React.lazy(() => import("../pages/secure/table/Table"));
+const Student = React.lazy(() => import("../pages/secure/Student/Student"));
+
 
 
 const ClientsRoutes = () => {
@@ -56,7 +58,7 @@ const ClientsRoutes = () => {
           }
         />
       </Route>
-      <Route element={ authService.isLoggedIn() ? <DashboardLayout /> : <Navigate to="/login" replace/> }>
+      <Route element={authService.isLoggedIn() ? <DashboardLayout /> : <Navigate to="/login" replace />}>
         <Route
           path="dashboard"
           element={
@@ -66,31 +68,22 @@ const ClientsRoutes = () => {
           }
         />
         <Route
-         
           path="admin-dashboard"
           element={
             <React.Suspense fallback={<Loader />}>
               <AdminDashboard />
             </React.Suspense>
           }
-        />
+        >
         <Route
-          path="teacher-dashboard"
+          path="students"
           element={
             <React.Suspense fallback={<Loader />}>
-              <TeacherDashboard />
+              <Student />
             </React.Suspense>
           }
         />
-        <Route
-          path="account-dashboard"
-          element={
-            <React.Suspense fallback={<Loader />}>
-              <AccountantDashboard />
-            </React.Suspense>
-          }
-        />
-        <Route
+         <Route
           path="profile"
           element={
             <React.Suspense fallback={<Loader />}>
@@ -114,6 +107,24 @@ const ClientsRoutes = () => {
             </React.Suspense>
           }
         />
+        </Route>
+        <Route
+          path="teacher-dashboard"
+          element={
+            <React.Suspense fallback={<Loader />}>
+              <TeacherDashboard />
+            </React.Suspense>
+          }
+        />
+        <Route
+          path="account-dashboard"
+          element={
+            <React.Suspense fallback={<Loader />}>
+              <AccountantDashboard />
+            </React.Suspense>
+          }
+        />
+       
       </Route>
 
       <Route element={<NotFoundLayout />}>

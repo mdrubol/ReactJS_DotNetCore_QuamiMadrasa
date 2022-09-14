@@ -10,6 +10,7 @@ import { UserContext } from "../../../layout/DashboardLayout";
 import { Collapse } from "react-bootstrap";
 import authService from "../../../services/auth.service";
 import { useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 const Admin = (props: any) => {
 
@@ -61,24 +62,26 @@ const Admin = (props: any) => {
             <Navigation
               
               // you can use your own router's api to get pathname
-              activeItemId="/management/members"
+              activeItemId="/students"
               onSelect={({ itemId }) => {
                 // maybe push to the route
+                console.log("Item id=>",itemId);
+                navigate(itemId);
               }}
               items={[
                 {
                   title: 'শিক্ষার্থীগণ',
-                  itemId: '/profile/a',
+                  itemId: '/admin-dashboard/students',
                   elemBefore: () => <Icon name="bi-mortarboard" />,
                 },
                 {
                   title: 'শিক্ষকমণ্ডলী',
-                  itemId: '/profile/b',
+                  itemId: '/admin-dashboard/profile',
                   elemBefore: () => <Icon name="bi-mortarboard-fill" />,
                 },
                 {
                   title: 'উপস্থিতি',
-                  itemId: '/management/c',
+                  itemId: '/admin-dashboard/managementrrrrrr',
                   elemBefore: () => <Icon name="bi-clipboard2" />,
                   subNav: [
                     {
@@ -262,7 +265,9 @@ const Admin = (props: any) => {
             </div>
           </Col>
         </Collapse>
-        <Col sm="10"><p>{dynamicContent}</p></Col>
+        <Col sm="10">
+        <Outlet />
+        </Col>
       </Row>
     </Container>
   );
