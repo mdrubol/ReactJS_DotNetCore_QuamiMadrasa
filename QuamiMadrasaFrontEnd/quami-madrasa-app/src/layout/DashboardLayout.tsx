@@ -8,7 +8,7 @@ import Stack from 'react-bootstrap/Stack';
 export const UserContext = React.createContext({} as any); //Initialise
 
 const DashboardLayout = () => {
-  const [dashboardContext, setDashboardContext] = useState({ showSidebar: false });
+  const [dashboardContext, setDashboardContext] = useState({ showSidebar: true });
   const value = { dashboardContext, setDashboardContext }
 
   return (

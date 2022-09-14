@@ -53,7 +53,7 @@ const SecureHeader = () => {
                 <div className="d-flex">
                 {
               authService.isLoggedIn() ?
-                <Button variant="primary" onClick={authService.logout}>
+                <Button variant="primary" onClick={logoutNow}>
                   সাইন আউট <i className="bi bi-box-arrow-in-right"></i>
                 </Button>
                 :

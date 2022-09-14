@@ -5,6 +5,7 @@ import "./App.css";
 import AuthService from "./services/auth.service";
 import ClientsRoutes from "./routes/Routes";
 import * as Icon from 'react-bootstrap-icons';
+import { Navigate } from "react-router-dom";
 
 
 class App extends Component<any, any> {
@@ -31,6 +32,7 @@ class App extends Component<any, any> {
   }
   logOut() {
     AuthService.logout();
+    <Navigate to="/"/>
   }
   render() {
     return (

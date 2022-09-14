@@ -1,11 +1,12 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Loader from "../components/loader/Loader";
 import DashboardLayout from "../layout/DashboardLayout";
 import Layout from "../layout/Layout";
 import NotFoundLayout from "../layout/NotFoundLayout";
 import Login from "../pages/public/login/Login";
 import NotFound from "../pages/public/NotFound";
+import authService from "../services/auth.service";
 const Home = React.lazy(() => import("../pages/public/home/Home"));
 const Contact = React.lazy(() => import("../pages/public/contact/Contact"));
 const Dashboard = React.lazy(() =>
@@ -55,7 +56,7 @@ const ClientsRoutes = () => {
           }
         />
       </Route>
-      <Route element={<DashboardLayout />}>
+      <Route element={ authService.isLoggedIn() ? <DashboardLayout /> : <Navigate to="/login" replace/> }>
         <Route
           path="dashboard"
           element={
@@ -65,6 +66,7 @@ const ClientsRoutes = () => {
           }
         />
         <Route
+         
           path="admin-dashboard"
           element={
             <React.Suspense fallback={<Loader />}>

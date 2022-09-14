@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const API_URL = "https://localhost:7291/api/Account/";
 class AuthService {
 
@@ -14,7 +15,6 @@ class AuthService {
   }
   logout() {
     localStorage.removeItem("user_token");
-
   }
   register(username: any, email: any, password: any) {
     return axios.post(API_URL + "signup", {
