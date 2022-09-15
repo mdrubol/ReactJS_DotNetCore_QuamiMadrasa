@@ -2,6 +2,7 @@ import React from "react";
 import { TableColumn } from "react-data-table-component";
 import movies from "./movies";
 import DataGrid, { GridParams } from "../../../components/datagrid/DataGrid";
+import Toolbar,{DataColumn, ToolbarParams} from '../../../components/datagrid/Toolbar';
 
 interface Movie {
   id: number;
@@ -61,6 +62,36 @@ const columns: TableColumn<Movie>[] = [
   }
 ];
 
+function getExcelColDefs<T>(colDefs:TableColumn<T>[]){
+
+  let excelColDefs:DataColumn[] = [];
+
+  colDefs.forEach(colDef => {
+    let propertyName:string = "";
+    let selector = colDef.selector?.toString();
+    if(selector)
+    {
+      let start:number = selector.indexOf('row.');
+      let end:number = selector.lastIndexOf('.');
+      let dotCount = (selector.split(".").length - 1);
+      if(end>4 && dotCount > 1)
+      {
+        propertyName = selector.substring(start+4,end);
+      }
+      else
+      {
+        propertyName = selector.substring(start+4,selector.length);
+      }
+      
+    }
+    
+    let col:DataColumn = {header:colDef.name? colDef.name.toString() : "" ,key:propertyName};
+    excelColDefs.push(col);
+
+  });
+
+  return excelColDefs;
+}
 
 
 function Student() {
@@ -73,8 +104,17 @@ function Student() {
     console.log("selected",selected)
   }
 
+  let toolbarParams:ToolbarParams = {
+     ExportExcelSettings:{
+      fileName:'movies',
+      dataSet:movies,
+      //excelColDefs:[{header:"ID",key:"id"},{header:"Title",key:"title"},{header:"Director",key:"director"}] //or
+       excelColDefs: getExcelColDefs(columns) //or pass null or undefined to get automatic excel
+    }
+  }
+
   let params: GridParams<Movie> = {
-    gridTitle: "Movies",
+    gridTitle: "Students",
     defaultSortFieldId: 2,
     data: movies,
     columnDefs: columns,
@@ -84,10 +124,11 @@ function Student() {
     paginationPerPage:10,
     selectableRowsSingle:false,
     onRowClicked: onRowClicked,
-    onSelectedRowsChange: onSelectedRowsChange
+    onSelectedRowsChange: onSelectedRowsChange,
+    toolbarParams: toolbarParams
   };
 
-
+  
 
   return (
     DataGrid<Movie>(params)

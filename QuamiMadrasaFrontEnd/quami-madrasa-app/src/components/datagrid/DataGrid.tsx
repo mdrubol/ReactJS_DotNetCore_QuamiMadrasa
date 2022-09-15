@@ -2,7 +2,7 @@ import React from "react";
 import DataTable, { TableColumn } from "react-data-table-component";
 import "bootstrap/dist/js/bootstrap.bundle.js";
 import "bootstrap/dist/css/bootstrap.css";
-import Toolbar from "./Toolbar";
+import Toolbar, { ToolbarParams } from "./Toolbar";
 import { Stack } from "react-bootstrap";
 
 export interface GridParams<T> {
@@ -15,6 +15,7 @@ export interface GridParams<T> {
   paginationPerPage: number;
   selectableRowsSingle: boolean;
   paginationRowsPerPageOptions: number[];
+  toolbarParams:ToolbarParams;
   onRowClicked: ((row: T, e: React.MouseEvent<Element, MouseEvent>) => void) | undefined;
   onSelectedRowsChange: ((selected: { allSelected: boolean; selectedCount: number; selectedRows: T[]; }) => void) | undefined;
 }
@@ -23,7 +24,7 @@ function DataGrid<T>(props: GridParams<T>) {
   return (
     <>
       <Stack gap={1} >
-        <Toolbar />
+        <Toolbar ExportExcelSettings={props.toolbarParams.ExportExcelSettings} />
         <DataTable
           title={props.gridTitle}
           columns={props.columnDefs}
