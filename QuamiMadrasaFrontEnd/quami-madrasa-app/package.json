@@ -25,6 +25,7 @@
     "react": ">=16.8.0",
     "react-bootstrap": "^2.5.0",
     "react-bootstrap-icons": "^1.8.4",
+    "react-csv": "^2.2.2",
     "react-data-table-component": "^7.5.3",
     "react-dom": ">=16.8.0",
     "react-minimal-side-navigation": "^1.9.2",
@@ -60,6 +61,7 @@
   },
   "devDependencies": {
     "@types/bootstrap": "^5.2.4",
-    "@types/file-saver": "^2.0.5"
+    "@types/file-saver": "^2.0.5",
+    "@types/react-csv": "^1.1.3"
   }
 }

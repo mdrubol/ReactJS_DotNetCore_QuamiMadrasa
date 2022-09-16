@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Alert, Button, ButtonGroup, Card, Col, Container, Form, InputGroup, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
 import Excel from 'exceljs';
 import { saveAs } from 'file-saver';
+import { CSVLink } from "react-csv";
 
 export interface DataColumn {
     header: string;
@@ -15,18 +16,29 @@ export interface ExportExcelParams {
     onExportClick?: () => Promise<void>;
 }
 
-export interface ToolbarParams {
-    ExportExcelSettings: ExportExcelParams;
+export interface CSVHeader {
+    label: string;
+    key: string;
 }
 
-const getMaxCellWidth = (minWidth:number,data: any[], propertyName?: string) => {
-    let maxWidth = minWidth+5;
-    if(propertyName)
-    {
+export interface ExportCSVParams {
+    fileName: string;
+    dataSet: any[];
+    header?: CSVHeader[];
+}
+
+export interface ToolbarParams {
+    ExportExcelSettings: ExportExcelParams;
+    ExportCSVSettings: ExportCSVParams;
+}
+
+const getMaxCellWidth = (minWidth: number, data: any[], propertyName?: string) => {
+    let maxWidth = minWidth + 5;
+    if (propertyName) {
         data.forEach((row: any, i) => {
             let cellWidth = row[propertyName].toString().length;
             if (row[propertyName] && cellWidth > maxWidth) {
-                maxWidth = cellWidth+5;
+                maxWidth = cellWidth + 5;
             }
         });
     }
@@ -35,9 +47,9 @@ const getMaxCellWidth = (minWidth:number,data: any[], propertyName?: string) => 
     return maxWidth;
 }
 
-const capitalizeFirstLetter=(str:string) => {
+const capitalizeFirstLetter = (str: string) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
-  }
+}
 
 const workSheetName = 'Worksheet1';
 const workBookName = 'WorkBook1';
@@ -57,22 +69,20 @@ function Toolbar(props: ToolbarParams) {
 
             // add worksheet columns
             // each columns contains header and its mapping key from data
-            if(props.ExportExcelSettings?.excelColDefs && props.ExportExcelSettings.dataSet && props.ExportExcelSettings.dataSet.length)
-            {
+            if (props.ExportExcelSettings?.excelColDefs && props.ExportExcelSettings.dataSet && props.ExportExcelSettings.dataSet.length) {
                 worksheet.columns = props.ExportExcelSettings.excelColDefs;
             }
-            else
-            {
-                let excelColDefs : DataColumn[] = [];
-                let keys:string[] = Object.keys(props.ExportExcelSettings.dataSet[0]);
-                keys.forEach(k=>{
-                    let columnDef:DataColumn = {header:capitalizeFirstLetter(k),key:k};
+            else {
+                let excelColDefs: DataColumn[] = [];
+                let keys: string[] = Object.keys(props.ExportExcelSettings.dataSet[0]);
+                keys.forEach(k => {
+                    let columnDef: DataColumn = { header: capitalizeFirstLetter(k), key: k };
                     excelColDefs.push(columnDef);
                 });
-                
+
                 worksheet.columns = excelColDefs;
             }
-            
+
 
             // updated the font for first row.
             worksheet.getRow(1).font = { bold: true };
@@ -80,7 +90,7 @@ function Toolbar(props: ToolbarParams) {
             // loop through all of the columns and set the alignment with width.
             worksheet.columns.forEach(column => {
 
-                column.width = getMaxCellWidth(column && column.header? (column.header as any).length + 5 : 10,props.ExportExcelSettings.dataSet, column.key);
+                column.width = getMaxCellWidth(column && column.header ? (column.header as any).length + 5 : 10, props.ExportExcelSettings.dataSet, column.key);
                 column.alignment = { horizontal: 'center' };
 
             });
@@ -125,14 +135,31 @@ function Toolbar(props: ToolbarParams) {
     };
 
     const onExcelExportClick = () => {
-
         if (props.ExportExcelSettings && props.ExportExcelSettings.dataSet
             && props.ExportExcelSettings.excelColDefs && props.ExportExcelSettings.fileName) {
-            console.log(props);
             saveAsExcel();
-
         }
+    }
 
+    const [csvHead, SetCsvHead] = useState([] as CSVHeader[]);
+
+    const onCSVExportClick = () => {
+        const fileName = props.ExportCSVSettings.fileName;
+        const dataSet = props.ExportCSVSettings.dataSet;
+
+        if (props.ExportCSVSettings?.header) {
+            SetCsvHead(props.ExportCSVSettings?.header);
+        }
+        else {
+            let csvHeader: CSVHeader[] = [];
+            let keys: string[] = Object.keys(props.ExportCSVSettings.dataSet[0]);
+            keys.forEach(k => {
+                let columnDef: CSVHeader = { label: capitalizeFirstLetter(k), key: k };
+                csvHeader.push(columnDef);
+            });
+
+            SetCsvHead(csvHeader);
+        }
     }
 
     return (
@@ -224,19 +251,14 @@ function Toolbar(props: ToolbarParams) {
                                             </Tooltip>
                                         }
                                     >
-                                        <Button className='btn-space btn-success'> <span className="bi bi-filetype-csv"></span></Button>
+                                        <Button className='btn-space btn-success'><CSVLink className='text-white' filename={props.ExportCSVSettings.fileName} data={props.ExportCSVSettings.dataSet} headers={csvHead} onClick={onCSVExportClick} ><span className="bi bi-filetype-csv"> </span></CSVLink></Button>
                                     </OverlayTrigger>
-
-
                                 </ButtonGroup>
                             </nav>
                         </div>
                     </Col>
                 </Row>
             </Container>
-
-
-
         </>
     );
 }

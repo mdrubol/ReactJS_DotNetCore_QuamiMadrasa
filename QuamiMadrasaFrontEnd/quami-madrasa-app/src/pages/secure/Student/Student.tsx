@@ -110,6 +110,11 @@ function Student() {
       dataSet:movies,
       //excelColDefs:[{header:"ID",key:"id"},{header:"Title",key:"title"},{header:"Director",key:"director"}] //or
        excelColDefs: getExcelColDefs(columns) //or pass null or undefined to get automatic excel
+    },
+    ExportCSVSettings:{
+      fileName:'movies',
+      dataSet: movies,
+      header : [{label:"ID",key:"id"},{label:"Title",key:"title"},{label:"Director",key:"director"}] //or
     }
   }
 
