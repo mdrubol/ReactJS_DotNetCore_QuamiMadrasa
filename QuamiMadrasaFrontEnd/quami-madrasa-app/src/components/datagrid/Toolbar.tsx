@@ -3,6 +3,18 @@ import { Alert, Button, ButtonGroup, Card, Col, Container, Form, InputGroup, Ove
 import Excel from 'exceljs';
 import { saveAs } from 'file-saver';
 import { CSVLink } from "react-csv";
+import { TableColumn } from 'react-data-table-component';
+
+
+export interface PDFHeader {
+    label: string;
+    key: string;
+}
+export interface ExportPDFParams {
+    fileName: string;
+    dataSet: any[];
+    header?: PDFHeader[];
+}
 
 export interface DataColumn {
     header: string;
@@ -30,6 +42,7 @@ export interface ExportCSVParams {
 export interface ToolbarParams {
     ExportExcelSettings: ExportExcelParams;
     ExportCSVSettings: ExportCSVParams;
+    ExportPDFSettings: ExportPDFParams;
 }
 
 const getMaxCellWidth = (minWidth: number, data: any[], propertyName?: string) => {
@@ -142,6 +155,8 @@ function Toolbar(props: ToolbarParams) {
     }
 
     const [csvHead, SetCsvHead] = useState([] as CSVHeader[]);
+    const [pdfHead, SetPdfHead] = useState([] as PDFHeader[]);
+    const [rows,setRows] = useState([] as any[]);
 
     const onCSVExportClick = () => {
         const fileName = props.ExportCSVSettings.fileName;
@@ -159,6 +174,44 @@ function Toolbar(props: ToolbarParams) {
             });
 
             SetCsvHead(csvHeader);
+        }
+    }
+
+    const onPDFExportClick = () => {
+        const fileName = props.ExportPDFSettings.fileName;
+        const dataSet = props.ExportPDFSettings.dataSet;
+
+        if (props.ExportPDFSettings?.header) {
+            SetPdfHead(props.ExportPDFSettings?.header);
+        }
+        else {
+            let pdfHeaders: PDFHeader[] = [];
+            let keys: string[] = Object.keys(props.ExportPDFSettings.dataSet[0]);
+            keys.forEach(k => {
+                let pdfHeader: PDFHeader = { label: capitalizeFirstLetter(k), key: k };
+                pdfHeaders.push(pdfHeader);
+            });
+
+            SetPdfHead(pdfHeaders);
+        }
+
+        if(dataSet && dataSet.length)
+        {
+            let keys: string[] = Object.keys(props.ExportPDFSettings.dataSet[0]);
+
+            if(pdfHead.length == keys.length)
+            {
+                setRows(dataSet);
+            }
+            else{
+
+                let tableRows:any[] = [];
+
+                dataSet.map((r)=>{
+                    //let row = {}
+                })
+            }
+            
         }
     }
 
@@ -255,6 +308,23 @@ function Toolbar(props: ToolbarParams) {
                                     </OverlayTrigger>
                                 </ButtonGroup>
                             </nav>
+                        </div>
+                        <div>
+                            <table className="table table-striped table-responsive">
+                                <thead>
+                                    {
+                                        pdfHead.map((header:PDFHeader,index:number)=>{
+                                            return (
+                                                <th>{header.label}</th>
+                                            )
+                                        })
+                                    }
+                                    
+                                </thead>
+                                <tbody>
+                                    <tr></tr>
+                                </tbody>
+                            </table>
                         </div>
                     </Col>
                 </Row>

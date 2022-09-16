@@ -115,6 +115,11 @@ function Student() {
       fileName:'movies',
       dataSet: movies,
       header : [{label:"ID",key:"id"},{label:"Title",key:"title"},{label:"Director",key:"director"}] //or
+    },
+    ExportPDFSettings:{
+      fileName:'movies',
+      dataSet:movies,
+      header: [{label:"ID",key:"id"},{label:"Title",key:"title"},{label:"Director",key:"director"}] //or leave blank
     }
   }
 
@@ -132,6 +137,9 @@ function Student() {
     onSelectedRowsChange: onSelectedRowsChange,
     toolbarParams: toolbarParams
   };
+
+
+  
 
   
 
