@@ -1,3 +1,11 @@
 .btn-space {
     margin-right: 3px;
 }
+
+.hide{
+    visibility: hidden;
+  }
+
+ .cursor-hand{
+  cursor: pointer;
+ }

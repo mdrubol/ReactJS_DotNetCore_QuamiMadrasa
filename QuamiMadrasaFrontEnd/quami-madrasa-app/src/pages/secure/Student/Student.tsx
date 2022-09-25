@@ -119,7 +119,8 @@ function Student() {
     ExportPDFSettings:{
       fileName:'movies',
       dataSet:movies,
-      header: [{label:"ID",key:"id"},{label:"Title",key:"title"},{label:"Director",key:"director"}] //or leave blank
+      //header: [{label:"ID",key:"id"},{label:"Title",key:"title"},{label:"Director",key:"director"}] //or leave blank
+      refPDF:undefined,
     }
   }
 

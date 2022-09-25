@@ -3,7 +3,39 @@ import { Alert, Button, ButtonGroup, Card, Col, Container, Form, InputGroup, Ove
 import Excel from 'exceljs';
 import { saveAs } from 'file-saver';
 import { CSVLink } from "react-csv";
-import { TableColumn } from 'react-data-table-component';
+import TablePDFExport from './TablePDFExport';
+import domToPdf from 'dom-to-pdf';
+import jsPDF, { jsPDFOptions } from 'jspdf';
+import ReactDOMServer from 'react-dom/server'
+
+const printPDF = (ref: React.ClassAttributes<HTMLDivElement> | React.LegacyRef<HTMLDivElement> | undefined) => {
+    const element = ref as any;
+
+    let options: jsPDFOptions = {};
+    options.orientation = "p";
+    options.unit = "px";
+    options.format = "letter";
+    let input: HTMLDivElement = element.current;
+
+    const pdf = new jsPDF(options);
+    pdf.html(input, { html2canvas: { scale: 0.57 } }).then(() => {
+        pdf.save("test.pdf");
+    });
+
+};
+
+const downloadPdf = (htmlString: string) => {
+    let options: jsPDFOptions = {};
+    options.orientation = "p";
+    options.unit = "px";
+    options.format = "letter";
+    //let input: HTMLDivElement = element.current;
+
+    const pdf = new jsPDF(options);
+    pdf.html(htmlString, { html2canvas: { scale: 0.57 } }).then(() => {
+        pdf.save("test.pdf");
+    });
+}
 
 
 export interface PDFHeader {
@@ -14,6 +46,7 @@ export interface ExportPDFParams {
     fileName: string;
     dataSet: any[];
     header?: PDFHeader[];
+    refPDF: React.ClassAttributes<HTMLDivElement> | React.LegacyRef<HTMLDivElement> | undefined;
 }
 
 export interface DataColumn {
@@ -60,7 +93,7 @@ const getMaxCellWidth = (minWidth: number, data: any[], propertyName?: string) =
     return maxWidth;
 }
 
-const capitalizeFirstLetter = (str: string) => {
+export const capitalizeFirstLetter = (str: string) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
@@ -155,8 +188,8 @@ function Toolbar(props: ToolbarParams) {
     }
 
     const [csvHead, SetCsvHead] = useState([] as CSVHeader[]);
-    const [pdfHead, SetPdfHead] = useState([] as PDFHeader[]);
-    const [rows,setRows] = useState([] as any[]);
+
+
 
     const onCSVExportClick = () => {
         const fileName = props.ExportCSVSettings.fileName;
@@ -178,46 +211,17 @@ function Toolbar(props: ToolbarParams) {
     }
 
     const onPDFExportClick = () => {
-        const fileName = props.ExportPDFSettings.fileName;
-        const dataSet = props.ExportPDFSettings.dataSet;
-
-        if (props.ExportPDFSettings?.header) {
-            SetPdfHead(props.ExportPDFSettings?.header);
-        }
-        else {
-            let pdfHeaders: PDFHeader[] = [];
-            let keys: string[] = Object.keys(props.ExportPDFSettings.dataSet[0]);
-            keys.forEach(k => {
-                let pdfHeader: PDFHeader = { label: capitalizeFirstLetter(k), key: k };
-                pdfHeaders.push(pdfHeader);
-            });
-
-            SetPdfHead(pdfHeaders);
+        if (props.ExportPDFSettings.refPDF) {
+            printPDF(props.ExportPDFSettings.refPDF);
         }
 
-        if(dataSet && dataSet.length)
-        {
-            let keys: string[] = Object.keys(props.ExportPDFSettings.dataSet[0]);
-
-            if(pdfHead.length == keys.length)
-            {
-                setRows(dataSet);
-            }
-            else{
-
-                let tableRows:any[] = [];
-
-                dataSet.map((r)=>{
-                    //let row = {}
-                })
-            }
-            
-        }
     }
 
+
     return (
+
         <>
-            <Container>
+            <Container className='cursor'>
                 <Row>
                     <Col sm={12}>
                         <div className="mt-2">
@@ -280,7 +284,7 @@ function Toolbar(props: ToolbarParams) {
                                             </Tooltip>
                                         }
                                     >
-                                        <Button className='btn-space btn-success'> <span className="bi bi-file-earmark-pdf"></span></Button>
+                                        <Button onClick={onPDFExportClick} className='btn-space btn-success'> <span className="bi bi-file-earmark-pdf"></span></Button>
                                     </OverlayTrigger>
 
                                     <OverlayTrigger
@@ -309,28 +313,17 @@ function Toolbar(props: ToolbarParams) {
                                 </ButtonGroup>
                             </nav>
                         </div>
-                        <div>
-                            <table className="table table-striped table-responsive">
-                                <thead>
-                                    {
-                                        pdfHead.map((header:PDFHeader,index:number)=>{
-                                            return (
-                                                <th>{header.label}</th>
-                                            )
-                                        })
-                                    }
-                                    
-                                </thead>
-                                <tbody>
-                                    <tr></tr>
-                                </tbody>
-                            </table>
-                        </div>
                     </Col>
                 </Row>
+                {<Row style={{visibility:'collapse',cursor:'pointer'}}>
+                    <Col md="12">
+                        <TablePDFExport exportPDFSettings={props.ExportPDFSettings} />
+                    </Col>
+                </Row>}
             </Container>
         </>
     );
 }
 
 export default Toolbar;
+
