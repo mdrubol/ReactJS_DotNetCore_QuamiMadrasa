@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using QuamiMadrasa.Application.CustomServices;
 using QuamiMadrasa.Application.ICustomServices;
 using QuamiMadrasa.Core.Interfaces;
 using QuamiMadrasa.Errors;
+using QuamiMadrasa.Helpers;
 using QuamiMadrasa.Infrastracture.Data;
 using QuamiMadrasa.Infrastracture.Repositories;
  
@@ -19,6 +21,9 @@ namespace QuamiMadrasa.Controllers.Extensions
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<QuamiMadrasaDBContext, QuamiMadrasaDBContext>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
+            services.AddScoped<ISectionRepository, SectionRepository>();
+            services.AddScoped<IMyClassRepository, MyClassRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -37,6 +42,16 @@ namespace QuamiMadrasa.Controllers.Extensions
                   return new BadRequestObjectResult(error);
               }
             );
+
+            // Auto Mapper Configurations
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfiles());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
             return services;
         }
     }

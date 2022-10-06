@@ -23,10 +23,6 @@ const CreateTable= (tableRows:any[],pdfHeaderData:PDFHeader[]):string =>
             tableBody +="</tr>";
         }
     }
-    else
-    {
-        console.log('Called');
-    }
     
 
 
@@ -43,18 +39,25 @@ function TablePDFExport(props: {exportPDFSettings:ExportPDFParams}) {
     const [body,setBody] = useState('');
 
     let pdfHeaderData: PDFHeader[] = [];
-    if (props?.exportPDFSettings.header) {
-        pdfHeaderData = props?.exportPDFSettings.header;
-    }
-    else {
-        
-        let keys: string[] = Object.keys(props.exportPDFSettings.dataSet[0]);
-        keys.forEach(k => {
-            let pdfHeader: PDFHeader = { label: capitalizeFirstLetter(k), key: k };
-            pdfHeaderData.push(pdfHeader);
-        });
 
-    }
+
+        if (props?.exportPDFSettings.header) {
+            pdfHeaderData = props?.exportPDFSettings.header;
+        }
+        else {
+            if(dataSet && dataSet.length)
+            {
+                let keys: string[] = Object.keys(props.exportPDFSettings.dataSet[0]);
+                keys.forEach(k => {
+                    let pdfHeader: PDFHeader = { label: capitalizeFirstLetter(k), key: k };
+                    pdfHeaderData.push(pdfHeader);
+                });
+        
+            }
+
+        }
+    
+
 
     let tableRows: any[] = [];
 

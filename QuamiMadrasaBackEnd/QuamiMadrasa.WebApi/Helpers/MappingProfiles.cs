@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using QuamiMadrasa.Core.Entities;
- 
+using QuamiMadrasa.WebApi.DTOs;
 
 namespace QuamiMadrasa.Helpers
 {
@@ -16,6 +16,11 @@ namespace QuamiMadrasa.Helpers
             //CreateMap<CustomerBasket, CustomerbasketDto>();
             //CreateMap<BasketItem, BasketItemDto>();
             //CreateMap<AddressDto, Core.Entities.OrderAggregate.Address>();
+
+            CreateMap<Student, StudentDto>().ReverseMap();
+            CreateMap<MyClass, MyClassDto>().ReverseMap();
+            CreateMap<Section, SectionDto>().ReverseMap();
+
         }
     }
 }

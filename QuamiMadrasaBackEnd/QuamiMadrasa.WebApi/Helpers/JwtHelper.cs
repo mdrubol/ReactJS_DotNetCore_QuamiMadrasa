@@ -13,7 +13,9 @@ namespace QuamiMadrasa.WebApi.Helpers
         string issuer,
         string audience,
         TimeSpan expiration,
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
         Claim[] additionalClaims = null)
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
         {
             var claims = new[]
             {

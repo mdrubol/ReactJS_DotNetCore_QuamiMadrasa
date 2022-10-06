@@ -17,25 +17,25 @@ namespace QuamiMadrasa.Infrastracture.Data
 
         }
 
-        DbSet<BloodGroup> BloodGroups { get; set; }
-        DbSet<ClassType> ClassType { get; set; }
-        DbSet<EmployeeType> EmployeeTypes { get; set; }
-        DbSet<Exam> Exams { get; set; }
-        DbSet<ExamRecord> ExamRecords { get; set; }
-        DbSet<Grade> Grades { get; set; }
-        DbSet<Hostel> Hostels { get; set; }
-        DbSet<Mark> Marks { get; set; }
-        DbSet<MyClass> Classes { get; set; }
-        DbSet<Nationality> Nationalities { get; set; }
-        DbSet<Payment> Payments { get; set; }
-        DbSet<PaymentDetail> PaymentDetails { get; set; }
-        DbSet<Promotion> Promotions { get; set; }
-        DbSet<Receipt> Receipts { get; set; }
-        DbSet<Section> Sections { get; set; }
-        DbSet<Setting> Settings { get; set; }
-        DbSet<Staff> Staffs { get; set; }
-        DbSet<Student> Students { get; set; }
-        DbSet<Subject> Subjects { get; set; }
+        public DbSet<BloodGroup> BloodGroups { get; set; }
+        public DbSet<ClassType> ClassType { get; set; }
+        public DbSet<EmployeeType> EmployeeTypes { get; set; }
+        public DbSet<Exam> Exams { get; set; }
+        public DbSet<ExamRecord> ExamRecords { get; set; }
+        public DbSet<Grade> Grades { get; set; }
+        public DbSet<Hostel> Hostels { get; set; }
+        public DbSet<Mark> Marks { get; set; }
+        public DbSet<MyClass> Classes { get; set; }
+        public DbSet<Nationality> Nationalities { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<PaymentDetail> PaymentDetails { get; set; }
+        public DbSet<Promotion> Promotions { get; set; }
+        public DbSet<Receipt> Receipts { get; set; }
+        public DbSet<Section> Sections { get; set; }
+        public DbSet<Setting> Settings { get; set; }
+        public DbSet<Staff> Staffs { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -71,6 +71,11 @@ namespace QuamiMadrasa.Infrastracture.Data
             new IdentityUserRole<int> { RoleId = 2, UserId = 2 },
             new IdentityUserRole<int> { RoleId = 3, UserId = 3 }
             );
+
+            modelBuilder.Entity<ClassType>().HasData(
+              new ClassType { Id = 1, Name = "Physical Class"},
+              new ClassType { Id = 2, Name = "Online Class" }
+              );
 
         }
 

@@ -6,6 +6,7 @@ import Layout from "../layout/Layout";
 import NotFoundLayout from "../layout/NotFoundLayout";
 import Login from "../pages/public/login/Login";
 import NotFound from "../pages/public/NotFound";
+import StudentList from "../pages/secure/Student/StudentList";
 import authService from "../services/auth.service";
 const Home = React.lazy(() => import("../pages/public/home/Home"));
 const Contact = React.lazy(() => import("../pages/public/contact/Contact"));
@@ -25,7 +26,7 @@ const AccountantDashboard = React.lazy(() =>
 const Profile = React.lazy(() => import("../pages/secure/profile/profile.component"))
 const Data = React.lazy(() => import("../pages/secure/data/Data"));
 const Table = React.lazy(() => import("../pages/secure/table/Table"));
-const Student = React.lazy(() => import("../pages/secure/Student/Student"));
+const Student = React.lazy(() => import("../pages/secure/Student/StudentList"));
 
 
 
@@ -79,7 +80,7 @@ const ClientsRoutes = () => {
           path="students"
           element={
             <React.Suspense fallback={<Loader />}>
-              <Student />
+              <StudentList />
             </React.Suspense>
           }
         />
