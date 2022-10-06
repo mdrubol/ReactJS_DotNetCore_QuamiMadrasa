@@ -106,7 +106,7 @@ function StudentList() {
       }
     })
     
-  },rowData);
+  },[rowData]);
   
 
  
