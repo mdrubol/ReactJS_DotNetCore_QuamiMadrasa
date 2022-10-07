@@ -6,7 +6,6 @@ export const GoBack = () => {
     return (
         <>
         <Button onClick={() => navigate(-1)} className='btn-space btn-primary btn-sm'> <span className="bi bi-arrow-left-circle"></span></Button>
-        {/*<i onClick={() => navigate(-1)} className="bi bi-arrow-left-circle goback btn-primary"></i>*/}
         </>
     );
 };

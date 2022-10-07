@@ -12,5 +12,14 @@ class StudentService {
     return axios.get(API_URL + 'GetClasses', { headers: authHeader() });
   }
 
+  getAllSections() {
+    return axios.get(API_URL + 'GetSections', { headers: authHeader() });
+  }
+
+  
+  addStudent(data:any) {
+    return axios.post(API_URL + 'CreateStudent',data, { headers: authHeader() });
+  }
+
 }
 export default new StudentService();

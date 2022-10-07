@@ -15,10 +15,12 @@ namespace QuamiMadrasa.WebApi.Controllers
         private readonly IStudentRepository _studentRepository;
         private readonly IMapper _mapper;
         private readonly IMyClassRepository _myClassRepository;
-        public StudentController(IStudentRepository studentRepository, IMyClassRepository myClassRepository, IMapper mapper)
+        private readonly ISectionRepository _sectionRepository;
+        public StudentController(IStudentRepository studentRepository, ISectionRepository sectionRepository, IMyClassRepository myClassRepository, IMapper mapper)
         {
             _studentRepository = studentRepository;
             _myClassRepository = myClassRepository;
+            _sectionRepository = sectionRepository;
             _mapper = mapper;
         }
         
@@ -89,6 +91,16 @@ namespace QuamiMadrasa.WebApi.Controllers
             var myClasses = await _myClassRepository.GetAllClasses();
 
             return Ok(myClasses);
+        }
+
+        [HttpGet]
+        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Route("GetSections")]
+        public async Task<ActionResult> GetSections()
+        {
+            var sections = await _sectionRepository.GetAllSections();
+
+            return Ok(sections);
         }
     }
 }
