@@ -6,7 +6,7 @@ import { CSVLink } from "react-csv";
 import TablePDFExport from './TablePDFExport';
 import domToPdf from 'dom-to-pdf';
 import jsPDF, { jsPDFOptions } from 'jspdf';
-import ReactDOMServer from 'react-dom/server'
+import { useNavigate } from "react-router-dom";
 
 const printPDF = (ref: React.ClassAttributes<HTMLDivElement> | React.LegacyRef<HTMLDivElement> | undefined) => {
     const element = ref as any;
@@ -24,18 +24,6 @@ const printPDF = (ref: React.ClassAttributes<HTMLDivElement> | React.LegacyRef<H
 
 };
 
-const downloadPdf = (htmlString: string) => {
-    let options: jsPDFOptions = {};
-    options.orientation = "p";
-    options.unit = "px";
-    options.format = "letter";
-    //let input: HTMLDivElement = element.current;
-
-    const pdf = new jsPDF(options);
-    pdf.html(htmlString, { html2canvas: { scale: 0.57 } }).then(() => {
-        pdf.save("test.pdf");
-    });
-}
 
 
 export interface PDFHeader {
@@ -76,16 +64,22 @@ export interface ToolbarParams {
     ExportExcelSettings: ExportExcelParams;
     ExportCSVSettings: ExportCSVParams;
     ExportPDFSettings: ExportPDFParams;
+    AddPageLink:string;
+    EditPageLink:string;
 }
 
 const getMaxCellWidth = (minWidth: number, data: any[], propertyName?: string) => {
     let maxWidth = minWidth + 5;
     if (propertyName) {
         data.forEach((row: any, i) => {
-            let cellWidth = row[propertyName].toString().length;
-            if (row[propertyName] && cellWidth > maxWidth) {
-                maxWidth = cellWidth + 5;
+            if(row[propertyName])
+            {
+                let cellWidth = row[propertyName].toString().length;
+                if (row[propertyName] && cellWidth > maxWidth) {
+                    maxWidth = cellWidth + 5;
+                }
             }
+
         });
     }
 
@@ -103,6 +97,7 @@ const workBookName = 'WorkBook1';
 
 function Toolbar(props: ToolbarParams) {
 
+    const navigate = useNavigate();
     const workbook = new Excel.Workbook();
 
     const saveAsExcel = async () => {
@@ -217,12 +212,26 @@ function Toolbar(props: ToolbarParams) {
 
     }
 
+    const onAddNewClicked = () => {
+        if(props.AddPageLink)
+        {
+         navigate(props.AddPageLink);   
+        }
+    }
+
+    const onEditClicked = () => {
+        if(props.EditPageLink)
+        {
+         navigate(props.EditPageLink);   
+        }
+    }
+
 
     return (
 
         <>
-            <Container className='cursor'>
-                <Row>
+            <Container >
+                <Row className='cursor'>
                     <Col sm={12}>
                         <div className="mt-2">
 
@@ -247,10 +256,10 @@ function Toolbar(props: ToolbarParams) {
                                             </Tooltip>
                                         }
                                     >
-                                        <Button className='btn-space btn-primary'> <span className="bi bi-file-earmark-plus"></span></Button>
+                                        <Button onClick={onAddNewClicked} className='btn-space btn-primary'> <span className="bi bi-file-earmark-plus"></span></Button>
                                     </OverlayTrigger>
 
-                                    <OverlayTrigger
+{/*                                     <OverlayTrigger
                                         key="top-2"
                                         placement="top"
                                         overlay={
@@ -259,9 +268,9 @@ function Toolbar(props: ToolbarParams) {
                                             </Tooltip>
                                         }
                                     >
-                                        <Button className='btn-space btn-info'> <span className="bi bi-pencil-square"></span></Button>
+                                        <Button onClick={onEditClicked} className='btn-space btn-info'> <span className="bi bi-pencil-square"></span></Button>
                                     </OverlayTrigger>
-
+ */}
                                     <OverlayTrigger
                                         key="top-3"
                                         placement="top"

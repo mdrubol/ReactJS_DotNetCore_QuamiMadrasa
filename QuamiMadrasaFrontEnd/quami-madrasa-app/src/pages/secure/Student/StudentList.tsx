@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import { TableColumn } from "react-data-table-component";
+import { useNavigate,Link } from "react-router-dom";
 import DataGrid, { GridParams } from "../../../components/datagrid/DataGrid";
 import Toolbar,{DataColumn, ToolbarParams} from '../../../components/datagrid/Toolbar';
+import Loader from "../../../components/loader/Loader";
 import Student from "../../../models/student.model";
 import studentService from "../../../services/student.service";
 
@@ -44,21 +47,14 @@ const columns: TableColumn<Student>[] = [
     right: true,
 
   },
-/*   {
+  {
     button: true,
-    cell: () => (
+    cell: (row, index, column, id) => (
       <>
-        <div className="openbtn text-center">
-          <button
-            type="button"
-            className="btn btn-primary"
-          >
-            Download
-          </button>
-        </div>
+    <Link to={"/admin-dashboard/student/"+row.id}> <span className="bi bi-pencil-square"></span></Link>
       </>
     )
-  } */
+  } 
 ];
 
 function getExcelColDefs<T>(colDefs:TableColumn<T>[]){
@@ -93,9 +89,12 @@ function getExcelColDefs<T>(colDefs:TableColumn<T>[]){
 }
 
 
+
 function StudentList() {
 
   const [rowData,setRowData] = useState([]);
+  const [isLoading,setIsLoading] = useState(true);
+  let selectedItemId:number =0;
 
   useEffect(()=>{
 
@@ -103,6 +102,7 @@ function StudentList() {
       if(resp && resp.status == 200)
       {
         setRowData(resp.data);
+        setIsLoading(false);
       }
     })
     
@@ -116,7 +116,9 @@ function StudentList() {
   }
 
   const onSelectedRowsChange = (selected: { allSelected: boolean; selectedCount: number; selectedRows: Student[]}) => {
-    console.log("selected",selected)
+    console.log("selected",selected);
+    if(selected && selected.selectedRows.length)
+    selectedItemId = selected.selectedRows[0].id;
   }
 
   let toolbarParams:ToolbarParams = {
@@ -136,7 +138,10 @@ function StudentList() {
       dataSet:rowData,
       //header: [{label:"ID",key:"id"},{label:"Title",key:"title"},{label:"Director",key:"director"}] //or leave blank
       refPDF:undefined,
-    }
+    },
+    AddPageLink: '/admin-dashboard/student',
+    EditPageLink: '/admin-dashboard/student/'+selectedItemId
+    
   }
 
   let params: GridParams<Student> = {
@@ -154,13 +159,8 @@ function StudentList() {
     toolbarParams: toolbarParams
   };
 
-
-  
-
-  
-
   return (
-    DataGrid<Student>(params)
+      isLoading ? <Loader/> : DataGrid<Student>(params)
   );
 }
 

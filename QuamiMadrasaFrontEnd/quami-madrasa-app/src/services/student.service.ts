@@ -8,5 +8,9 @@ class StudentService {
     return axios.get(API_URL + 'GetStudents', { headers: authHeader() });
   }
 
+  getAllClasses() {
+    return axios.get(API_URL + 'GetClasses', { headers: authHeader() });
+  }
+
 }
 export default new StudentService();

@@ -1,5 +1,6 @@
 import ClassType from "./classType.model"
 import Hostel from "./hostel.model"
+import MyClass from "./myClass.model"
 import Section from "./section.model"
 
  interface Student {
@@ -7,7 +8,7 @@ import Section from "./section.model"
     userId: number
 
     myClassId: number
-    myClass: ClassType
+    myClass: MyClass
 
     sectionId: number
     section: Section

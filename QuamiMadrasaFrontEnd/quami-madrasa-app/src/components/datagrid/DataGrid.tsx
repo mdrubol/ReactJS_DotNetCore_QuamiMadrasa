@@ -24,7 +24,7 @@ function DataGrid<T>(props: GridParams<T>) {
   return (
     <>
       <Stack gap={1} >
-        <Toolbar ExportExcelSettings={props.toolbarParams.ExportExcelSettings} ExportCSVSettings={props.toolbarParams.ExportCSVSettings} ExportPDFSettings={props.toolbarParams.ExportPDFSettings} />
+        <Toolbar AddPageLink={props.toolbarParams.AddPageLink} EditPageLink={props.toolbarParams.EditPageLink} ExportExcelSettings={props.toolbarParams.ExportExcelSettings} ExportCSVSettings={props.toolbarParams.ExportCSVSettings} ExportPDFSettings={props.toolbarParams.ExportPDFSettings} />
         <DataTable
           title={props.gridTitle}
           columns={props.columnDefs}

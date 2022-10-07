@@ -11,6 +11,7 @@ import { Collapse } from "react-bootstrap";
 import authService from "../../../services/auth.service";
 import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
+import './admin.component.css';
 
 const Admin = (props: any) => {
 
@@ -266,7 +267,9 @@ const Admin = (props: any) => {
           </Col>
         </Collapse>
         <Col sm="10">
-        <Outlet />
+          <Container className="content-place-holder mt-2">
+          <Outlet />
+          </Container>
         </Col>
       </Row>
     </Container>

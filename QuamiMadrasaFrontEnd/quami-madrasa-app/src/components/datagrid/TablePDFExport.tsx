@@ -88,7 +88,7 @@ function TablePDFExport(props: {exportPDFSettings:ExportPDFParams}) {
            props.exportPDFSettings.refPDF = divToPrintPDF;
         }
         
-    },[tableRows]);
+    },[]);
 
     
     

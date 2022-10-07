@@ -6,6 +6,7 @@ import Layout from "../layout/Layout";
 import NotFoundLayout from "../layout/NotFoundLayout";
 import Login from "../pages/public/login/Login";
 import NotFound from "../pages/public/NotFound";
+import StudentForm from "../pages/secure/Student/StudentForm";
 import StudentList from "../pages/secure/Student/StudentList";
 import authService from "../services/auth.service";
 const Home = React.lazy(() => import("../pages/public/home/Home"));
@@ -76,38 +77,54 @@ const ClientsRoutes = () => {
             </React.Suspense>
           }
         >
-        <Route
-          path="students"
-          element={
-            <React.Suspense fallback={<Loader />}>
-              <StudentList />
-            </React.Suspense>
-          }
-        />
-         <Route
-          path="profile"
-          element={
-            <React.Suspense fallback={<Loader />}>
-              <Profile />
-            </React.Suspense>
-          }
-        />
-        <Route
-          path="data"
-          element={
-            <React.Suspense fallback={<Loader />}>
-              <Data />
-            </React.Suspense>
-          }
-        />
-        <Route
-          path="table"
-          element={
-            <React.Suspense fallback={<Loader />}>
-              <Table />
-            </React.Suspense>
-          }
-        />
+          <Route
+            path="students"
+            element={
+              <React.Suspense fallback={<Loader />}>
+                <StudentList />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="student"
+            element={
+              <React.Suspense fallback={<Loader />}>
+                <StudentForm />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="student/:id"
+            element={
+              <React.Suspense fallback={<Loader />}>
+                <StudentForm />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="profile"
+            element={
+              <React.Suspense fallback={<Loader />}>
+                <Profile />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="data"
+            element={
+              <React.Suspense fallback={<Loader />}>
+                <Data />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="table"
+            element={
+              <React.Suspense fallback={<Loader />}>
+                <Table />
+              </React.Suspense>
+            }
+          />
         </Route>
         <Route
           path="teacher-dashboard"
@@ -125,7 +142,7 @@ const ClientsRoutes = () => {
             </React.Suspense>
           }
         />
-       
+
       </Route>
 
       <Route element={<NotFoundLayout />}>
