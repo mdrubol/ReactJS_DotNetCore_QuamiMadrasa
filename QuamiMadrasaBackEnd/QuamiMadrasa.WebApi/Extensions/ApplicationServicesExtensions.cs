@@ -24,6 +24,7 @@ namespace QuamiMadrasa.Controllers.Extensions
             services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<ISectionRepository, SectionRepository>();
             services.AddScoped<IMyClassRepository, MyClassRepository>();
+            services.AddScoped<IStaffRepository, StaffRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

@@ -6,8 +6,12 @@ import Layout from "../layout/Layout";
 import NotFoundLayout from "../layout/NotFoundLayout";
 import Login from "../pages/public/login/Login";
 import NotFound from "../pages/public/NotFound";
+import StaffAttendence from "../pages/secure/attendence/staff/StaffAttendence";
+import StudentAttendence from "../pages/secure/attendence/student/StudentAttendence";
 import StudentForm from "../pages/secure/Student/StudentForm";
 import StudentList from "../pages/secure/Student/StudentList";
+import TeacherForm from "../pages/secure/teacher/TeacherForm";
+import TeacherList from "../pages/secure/teacher/TeacherList";
 import authService from "../services/auth.service";
 const Home = React.lazy(() => import("../pages/public/home/Home"));
 const Contact = React.lazy(() => import("../pages/public/contact/Contact"));
@@ -102,10 +106,42 @@ const ClientsRoutes = () => {
             }
           />
           <Route
+            path="teachers"
+            element={
+              <React.Suspense fallback={<Loader />}>
+                <TeacherList />
+              </React.Suspense>
+            }
+          />
+           <Route
+            path="teacher"
+            element={
+              <React.Suspense fallback={<Loader />}>
+                <TeacherForm />
+              </React.Suspense>
+            }
+          />
+          <Route
             path="profile"
             element={
               <React.Suspense fallback={<Loader />}>
                 <Profile />
+              </React.Suspense>
+            }
+          />
+           <Route
+            path="student-attendence"
+            element={
+              <React.Suspense fallback={<Loader />}>
+                <StudentAttendence />
+              </React.Suspense>
+            }
+          />
+           <Route
+            path="staff-attendence"
+            element={
+              <React.Suspense fallback={<Loader />}>
+                <StaffAttendence />
               </React.Suspense>
             }
           />

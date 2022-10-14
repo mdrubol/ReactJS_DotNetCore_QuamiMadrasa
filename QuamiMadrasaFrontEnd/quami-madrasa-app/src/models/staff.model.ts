@@ -6,7 +6,8 @@ interface Staff {
     employeeTypeId: number
     employeeType: EmployeeType
     code: string
-    empDate: string
+    empDate: string,
+    fullName:string
 }
 
 export default Staff;

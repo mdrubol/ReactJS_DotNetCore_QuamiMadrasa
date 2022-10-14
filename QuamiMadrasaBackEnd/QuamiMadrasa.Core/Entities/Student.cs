@@ -11,7 +11,7 @@ namespace QuamiMadrasa.Core.Entities
     public class Student : BaseEntity
     {
         public int? UserId { get; set; }
-
+        public string FullName { get; set; }
         public int MyClassId { get; set; }
         public MyClass MyClass { get; set; }    
 

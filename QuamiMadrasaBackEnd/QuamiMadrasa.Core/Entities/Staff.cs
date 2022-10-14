@@ -9,6 +9,7 @@ namespace QuamiMadrasa.Core.Entities
     public class Staff : BaseEntity
     {
         public int? UserId { get; set; }
+        public string FullName { get; set; }
         public int EmployeeTypeId { get; set; }
 
         public EmployeeType EmployeeType { get; set; }  

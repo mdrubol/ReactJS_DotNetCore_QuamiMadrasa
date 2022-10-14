@@ -68,6 +68,7 @@ const Admin = (props: any) => {
                 onSelect={({ itemId }) => {
                   // maybe push to the route
                   console.log("Item id=>", itemId);
+                  if(!itemId.includes('#'))
                   navigate(itemId);
                 }}
                 items={[
@@ -78,29 +79,29 @@ const Admin = (props: any) => {
                   },
                   {
                     title: 'শিক্ষকমণ্ডলী',
-                    itemId: '/admin-dashboard/profile',
+                    itemId: '/admin-dashboard/teachers',
                     elemBefore: () => <Icon name="bi-mortarboard-fill" />,
                   },
                   {
                     title: 'উপস্থিতি',
-                    itemId: '/admin-dashboard/managementrrrrrr',
+                    itemId: '#1',
                     elemBefore: () => <Icon name="bi-clipboard2" />,
                     subNav: [
                       {
                         title: 'ছাত্রছাত্রীদের',
-                        itemId: '/management/projects/v',
+                        itemId: '/admin-dashboard/student-attendence',
                         elemBefore: () => <Icon name="bi-mortarboard" />,
                       },
                       {
                         title: 'কর্মচারীগণের',
-                        itemId: '/management/members/m',
+                        itemId: '/admin-dashboard/staff-attendence',
                         elemBefore: () => <Icon name="bi-mortarboard-fill" />,
                       },
                     ],
                   },
                   {
                     title: 'একাডেমিক',
-                    itemId: '/another/h',
+                    itemId: '#2',
                     elemBefore: () => <Icon name="bi-bank" />,
                     subNav: [
                       {
@@ -127,7 +128,7 @@ const Admin = (props: any) => {
                   },
                   {
                     title: 'ভর্তি',
-                    itemId: '/management/hsr',
+                    itemId: '#3',
                     elemBefore: () => <Icon name="bi-clipboard2-check-fill" />,
                     subNav: [
                       {
@@ -144,7 +145,7 @@ const Admin = (props: any) => {
                   },
                   {
                     title: 'পরীক্ষা',
-                    itemId: '/management/asa3',
+                    itemId: '#4',
                     elemBefore: () => <Icon name="bi-award" />,
                     subNav: [
                       {
@@ -161,7 +162,7 @@ const Admin = (props: any) => {
                   },
                   {
                     title: 'ফলাফল',
-                    itemId: '/management/asae',
+                    itemId: '#5',
                     elemBefore: () => <Icon name="bi-clipboard-pulse" />,
                     subNav: [
                       {
@@ -188,7 +189,7 @@ const Admin = (props: any) => {
                   },
                   {
                     title: 'HRM',
-                    itemId: '/management/asa30',
+                    itemId: '#6',
                     elemBefore: () => <Icon name="bi-people" />,
                     subNav: [
                       {
@@ -205,7 +206,7 @@ const Admin = (props: any) => {
                   },
                   {
                     title: 'Account',
-                    itemId: '/management/lsar301',
+                    itemId: '#7',
                     elemBefore: () => <Icon name="bi-bank" />,
                     subNav: [
                       {
@@ -237,7 +238,7 @@ const Admin = (props: any) => {
                   },
                   {
                     title: 'Payroll',
-                    itemId: '/management/asa3x0',
+                    itemId: '#8',
                     elemBefore: () => <Icon name="bi-currency-dollar" />,
                     subNav: [
                       {

@@ -20,6 +20,8 @@ namespace QuamiMadrasa.Helpers
             CreateMap<Student, StudentDto>().ReverseMap();
             CreateMap<MyClass, MyClassDto>().ReverseMap();
             CreateMap<Section, SectionDto>().ReverseMap();
+            CreateMap<Staff, StaffDto>().ReverseMap();
+            CreateMap<EmployeeType, EmployeeTypeDto>().ReverseMap();
 
         }
     }
