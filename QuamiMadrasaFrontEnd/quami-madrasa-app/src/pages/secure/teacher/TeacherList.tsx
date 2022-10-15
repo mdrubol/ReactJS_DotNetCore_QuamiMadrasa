@@ -93,7 +93,7 @@ function TeacherList() {
       }
     })
     
-  },[rowData]);
+  },[]);
   
 
  

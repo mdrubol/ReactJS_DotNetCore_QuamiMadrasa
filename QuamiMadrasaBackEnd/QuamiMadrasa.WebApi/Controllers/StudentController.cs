@@ -31,7 +31,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         {
            var students = await _studentRepository.GetAllStudents();
 
-            return Ok(students);
+            return Ok(_mapper.Map<StudentDto>(students));
         }
 
         [HttpGet]

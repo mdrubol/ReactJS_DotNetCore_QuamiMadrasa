@@ -26,5 +26,6 @@ namespace QuamiMadrasa.WebApi.DTOs
         public short? Age { get; set; }
 
         public string YearAdmitted { get; set; }
+        public string AttendenceStatus { get; set; }
     }
 }

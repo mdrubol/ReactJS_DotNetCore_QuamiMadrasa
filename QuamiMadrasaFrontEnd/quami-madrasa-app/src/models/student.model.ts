@@ -6,7 +6,7 @@ import Section from "./section.model"
  interface Student {
     id:number
     userId: number
-
+    fullName:string
     myClassId: number
     myClass: MyClass
 
