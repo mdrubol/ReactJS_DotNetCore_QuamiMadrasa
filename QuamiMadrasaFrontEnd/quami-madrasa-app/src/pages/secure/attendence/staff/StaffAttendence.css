@@ -1,6 +1,7 @@
 .custom-card:hover {
-    border: 1px solid red;
+    border: 1px solid rgb(136, 222, 248);
 }
-.dirty{
+
+.dirty {
     background-color: rgb(78, 211, 252);
 }
