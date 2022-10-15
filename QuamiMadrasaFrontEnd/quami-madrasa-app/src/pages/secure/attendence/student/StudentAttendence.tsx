@@ -32,8 +32,8 @@ function StudentAttendence(props: any) {
                   <Card.Title>{st.admNo}</Card.Title>
                   <Card.Subtitle className="mb-2 text-muted">{st.fullName}</Card.Subtitle>
                   <Form.Check inline label="P" name="group1" type="radio" id={`inline-radio-${index}`}/>
-                  <Form.Check inline label="A" name="group1" type="radio" id={`inline-radio-2`}/>
-                  <Form.Check inline label="L" name="group1" type="radio" id={`inline-radio-3`}/>
+                  <Form.Check inline label="A" name="group1" type="radio" id={`inline-radio-${index}`}/>
+                  <Form.Check inline label="L" name="group1" type="radio" id={`inline-radio-${index}`}/>
                 </Card.Body>
               </Card>
             )
