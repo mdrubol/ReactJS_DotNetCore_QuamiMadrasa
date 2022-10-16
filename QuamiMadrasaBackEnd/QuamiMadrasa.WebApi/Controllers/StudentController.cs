@@ -16,11 +16,15 @@ namespace QuamiMadrasa.WebApi.Controllers
         private readonly IMapper _mapper;
         private readonly IMyClassRepository _myClassRepository;
         private readonly ISectionRepository _sectionRepository;
-        public StudentController(IStudentRepository studentRepository, ISectionRepository sectionRepository, IMyClassRepository myClassRepository, IMapper mapper)
+        private readonly ISubjectRepository _subjectRepository;
+        public StudentController(IStudentRepository studentRepository,
+            ISectionRepository sectionRepository, ISubjectRepository subjectRepository,
+            IMyClassRepository myClassRepository, IMapper mapper)
         {
             _studentRepository = studentRepository;
             _myClassRepository = myClassRepository;
             _sectionRepository = sectionRepository;
+            _subjectRepository = subjectRepository; 
             _mapper = mapper;
         }
         
@@ -93,6 +97,25 @@ namespace QuamiMadrasa.WebApi.Controllers
             return Ok(myClasses);
         }
 
+        [HttpPost]
+        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Route("CreateClass")]
+        public async Task<ActionResult> CreateClass(MyClassDto  classDto)
+        {
+            try
+            {
+                var stud = await _myClassRepository.AddClass(_mapper.Map<MyClass>(classDto));
+
+                return Ok(stud);
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, ex.Message);
+            }
+
+        }
+
         [HttpGet]
         //[Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("GetSections")]
@@ -101,6 +124,54 @@ namespace QuamiMadrasa.WebApi.Controllers
             var sections = await _sectionRepository.GetAllSections();
 
             return Ok(sections);
+        }
+
+        [HttpPost]
+        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Route("CreateSection")]
+        public async Task<ActionResult> CreateSection(Section section)
+        {
+            try
+            {
+                var stud = await _sectionRepository.AddSection(_mapper.Map<Section>(section));
+
+                return Ok(stud);
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, ex.Message);
+            }
+
+        }
+
+        [HttpGet]
+        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Route("GetSubjects")]
+        public async Task<ActionResult> GetSubjects()
+        {
+            var sections = await _subjectRepository.GetAllSubjects();
+
+            return Ok(sections);
+        }
+
+        [HttpPost]
+        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Route("CreateSubject")]
+        public async Task<ActionResult> CreateSubject(Subject subject)
+        {
+            try
+            {
+                var stud = await _subjectRepository.AddSubject(_mapper.Map<Subject>(subject));
+
+                return Ok(stud);
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, ex.Message);
+            }
+
         }
     }
 }

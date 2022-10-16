@@ -106,17 +106,17 @@ const Admin = (props: any) => {
                     subNav: [
                       {
                         title: 'শ্রেণী',
-                        itemId: '/management/teams/k',
+                        itemId: '/admin-dashboard/class',
                         elemBefore: () => <Icon name="bi-diagram-3" />
                       },
                       {
                         title: 'শাখা',
-                        itemId: '/management/teams/p',
+                        itemId: '/admin-dashboard/section',
                         elemBefore: () => <Icon name="bi-intersect" />
                       },
                       {
                         title: 'বিষয়',
-                        itemId: '/management/teams/e',
+                        itemId: '/admin-dashboard/subject',
                         elemBefore: () => <Icon name="bi-book" />
                       },
                     ],

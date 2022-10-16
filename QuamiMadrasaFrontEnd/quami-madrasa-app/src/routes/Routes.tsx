@@ -6,6 +6,9 @@ import Layout from "../layout/Layout";
 import NotFoundLayout from "../layout/NotFoundLayout";
 import Login from "../pages/public/login/Login";
 import NotFound from "../pages/public/NotFound";
+import MyClassList from "../pages/secure/academic/MyClassList";
+import SectionList from "../pages/secure/academic/SectionList";
+import SubjectList from "../pages/secure/academic/SubjectList";
 import StaffAttendence from "../pages/secure/attendence/staff/StaffAttendence";
 import StudentAttendence from "../pages/secure/attendence/student/StudentAttendence";
 import StudentForm from "../pages/secure/Student/StudentForm";
@@ -82,6 +85,30 @@ const ClientsRoutes = () => {
           }
         >
           <Route
+            path="class"
+            element={
+              <React.Suspense fallback={<Loader />}>
+                <MyClassList />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="section"
+            element={
+              <React.Suspense fallback={<Loader />}>
+                <SectionList />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="subject"
+            element={
+              <React.Suspense fallback={<Loader />}>
+                <SubjectList />
+              </React.Suspense>
+            }
+          />
+          <Route
             path="students"
             element={
               <React.Suspense fallback={<Loader />}>
@@ -113,7 +140,7 @@ const ClientsRoutes = () => {
               </React.Suspense>
             }
           />
-           <Route
+          <Route
             path="teacher"
             element={
               <React.Suspense fallback={<Loader />}>
@@ -129,7 +156,7 @@ const ClientsRoutes = () => {
               </React.Suspense>
             }
           />
-           <Route
+          <Route
             path="student-attendence"
             element={
               <React.Suspense fallback={<Loader />}>
@@ -137,7 +164,7 @@ const ClientsRoutes = () => {
               </React.Suspense>
             }
           />
-           <Route
+          <Route
             path="staff-attendence"
             element={
               <React.Suspense fallback={<Loader />}>
