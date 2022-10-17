@@ -27,7 +27,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         {
            var staffs = await _staffRepository.GetAllStaffs();
 
-            return Ok(staffs);
+            return Ok(_mapper.Map<List<StaffDto>>(staffs));
         }
 
         [HttpGet]

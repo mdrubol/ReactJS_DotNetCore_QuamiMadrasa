@@ -123,7 +123,7 @@ const Admin = (props: any) => {
                   },
                   {
                     title: 'নোটিশ বোর্ড',
-                    itemId: '/admin-dashboard/notice',
+                    itemId: '/admin-dashboard/notices',
                     elemBefore: () => <Icon name="bi-megaphone" />
                   },
                   {
@@ -194,7 +194,7 @@ const Admin = (props: any) => {
                     subNav: [
                       {
                         title: 'Employee',
-                        itemId: '/management/asa50',
+                        itemId: '/admin-dashboard/employees',
                         elemBefore: () => <Icon name="bi-person" />
                       },
                       {

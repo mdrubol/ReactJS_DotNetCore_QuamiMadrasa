@@ -12,6 +12,7 @@ import SectionList from "../pages/secure/academic/SectionList";
 import SubjectList from "../pages/secure/academic/SubjectList";
 import StaffAttendence from "../pages/secure/attendence/staff/StaffAttendence";
 import StudentAttendence from "../pages/secure/attendence/student/StudentAttendence";
+import EmployeeList from "../pages/secure/hrm/EmployeeList";
 import NoticeList from "../pages/secure/notice/NoticeList";
 import StudentForm from "../pages/secure/Student/StudentForm";
 import StudentList from "../pages/secure/Student/StudentList";
@@ -119,7 +120,7 @@ const ClientsRoutes = () => {
             }
           />
           <Route
-            path="notice"
+            path="notices"
             element={
               <React.Suspense fallback={<Loader />}>
                 <NoticeList />
@@ -147,6 +148,14 @@ const ClientsRoutes = () => {
             element={
               <React.Suspense fallback={<Loader />}>
                 <StudentForm />
+              </React.Suspense>
+            }
+          />
+                    <Route
+            path="employees"
+            element={
+              <React.Suspense fallback={<Loader />}>
+                <EmployeeList />
               </React.Suspense>
             }
           />
