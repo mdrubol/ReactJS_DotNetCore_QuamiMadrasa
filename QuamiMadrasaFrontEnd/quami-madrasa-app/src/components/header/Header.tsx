@@ -68,7 +68,7 @@ const Header = () => {
                 একটা ফরম
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link as={NavLink} to="/contact4">
+            <Nav.Link as={NavLink} to="/notice-board">
               নোটিশ বোর্ড
             </Nav.Link>
             <Nav.Link as={NavLink} to="/contact5">

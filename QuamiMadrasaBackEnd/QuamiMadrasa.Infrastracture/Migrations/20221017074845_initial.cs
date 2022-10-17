@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace QuamiMadrasa.Infrastracture.Migrations
 {
-    public partial class student_staff_change : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -162,6 +162,25 @@ namespace QuamiMadrasa.Infrastracture.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Nationalities", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Notices",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FromDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ToDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsPublished = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notices", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -625,9 +644,9 @@ namespace QuamiMadrasa.Infrastracture.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "aca0e5fe-1691-4d6e-ae6a-65496a63e69c", "Admin", "Administrator" },
-                    { 2, "de5a4bbf-e1dd-4098-b357-f6626c864ed7", "Teacher", "Teacher" },
-                    { 3, "6ab81c99-1e44-4f0b-acff-7a9e4ceccb94", "Accountant", "Accountant" }
+                    { 1, "22dfcc59-d323-4433-a3dc-51fc4abe9a62", "Admin", "Administrator" },
+                    { 2, "d7da6772-6660-45f4-8668-cf980f6a526a", "Teacher", "Teacher" },
+                    { 3, "638fa77e-4957-4fd5-9cad-c08f50ba2f13", "Accountant", "Accountant" }
                 });
 
             migrationBuilder.InsertData(
@@ -635,9 +654,9 @@ namespace QuamiMadrasa.Infrastracture.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "5e4e84cd-f719-4206-80f2-87ce285d75b6", "admin@madrasha.com", true, false, null, "admin@madrasha.com", "Admin", "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9", null, false, null, false, "Admin" },
-                    { 2, 0, "c97ab921-dd72-4cf2-a83a-037ccdf94090", "teacher01@madrasha.com", true, false, null, "teacher01@madrasha.com", null, "cde383eee8ee7a4400adf7a15f716f179a2eb97646b37e089eb8d6d04e663416", null, false, null, false, "teacher01" },
-                    { 3, 0, "49158e18-51e3-4edb-ae90-45a264f623b4", "accountant01@madrasha.com", true, false, null, "accountant01@madrasha.com", null, "4d393ec34c3c6a875b95e66df5e6d6fc09efc33d66f12e3e98afca347d6b7638", null, false, null, false, "accountant01" }
+                    { 1, 0, "17d1c760-2ceb-4c97-a2e4-6ac3aff4d555", "admin@madrasha.com", true, false, null, "admin@madrasha.com", "Admin", "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9", null, false, null, false, "Admin" },
+                    { 2, 0, "31b16148-d425-48c0-8cbe-56e0b2f2e870", "teacher01@madrasha.com", true, false, null, "teacher01@madrasha.com", null, "cde383eee8ee7a4400adf7a15f716f179a2eb97646b37e089eb8d6d04e663416", null, false, null, false, "teacher01" },
+                    { 3, 0, "f253076c-16a9-4449-91df-72632c80eb95", "accountant01@madrasha.com", true, false, null, "accountant01@madrasha.com", null, "4d393ec34c3c6a875b95e66df5e6d6fc09efc33d66f12e3e98afca347d6b7638", null, false, null, false, "accountant01" }
                 });
 
             migrationBuilder.InsertData(
@@ -810,6 +829,9 @@ namespace QuamiMadrasa.Infrastracture.Migrations
 
             migrationBuilder.DropTable(
                 name: "Nationalities");
+
+            migrationBuilder.DropTable(
+                name: "Notices");
 
             migrationBuilder.DropTable(
                 name: "PaymentDetails");

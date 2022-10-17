@@ -22,12 +22,24 @@ class AcademicService {
     return axios.post(API_URL + 'CreateSubject',data, { headers: authHeader() });
   }
 
+  updateSubject(data:any) {
+    return axios.put(API_URL + 'UpdateSubject',data, { headers: authHeader() });
+  }
+
   addSection(data:any) {
     return axios.post(API_URL + 'CreateSection',data, { headers: authHeader() });
   }
 
+  updateSection(data:any) {
+    return axios.put(API_URL + 'UpdateSection',data, { headers: authHeader() });
+  }
+
   addClass(data:any) {
     return axios.post(API_URL + 'CreateClass',data, { headers: authHeader() });
+  }
+
+  updateClass(data:any) {
+    return axios.put(API_URL + 'UpdateClass',data, { headers: authHeader() });
   }
 
 }

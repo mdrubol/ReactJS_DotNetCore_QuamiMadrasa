@@ -27,6 +27,7 @@ namespace QuamiMadrasa.Infrastracture.Data
         public DbSet<Mark> Marks { get; set; }
         public DbSet<MyClass> Classes { get; set; }
         public DbSet<Nationality> Nationalities { get; set; }
+        public DbSet<Notice> Notices { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<PaymentDetail> PaymentDetails { get; set; }
         public DbSet<Promotion> Promotions { get; set; }

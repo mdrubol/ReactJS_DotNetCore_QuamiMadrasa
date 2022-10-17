@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Config\**" />
     <Compile Remove="Migrations\**" />
+    <EmbeddedResource Remove="Config\**" />
     <EmbeddedResource Remove="Migrations\**" />
+    <None Remove="Config\**" />
     <None Remove="Migrations\**" />
   </ItemGroup>
 
@@ -31,9 +34,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0" />
 		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.16.0" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.16.0" />
-	</ItemGroup>
-	<ItemGroup>
-		<Folder Include="Config\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\QuamiMadrasa.Core\QuamiMadrasa.Core.csproj" />

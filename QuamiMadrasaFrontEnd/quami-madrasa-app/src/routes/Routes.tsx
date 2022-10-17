@@ -6,11 +6,13 @@ import Layout from "../layout/Layout";
 import NotFoundLayout from "../layout/NotFoundLayout";
 import Login from "../pages/public/login/Login";
 import NotFound from "../pages/public/NotFound";
+import NoticeBoard from "../pages/public/notice/NoticeBoard";
 import MyClassList from "../pages/secure/academic/MyClassList";
 import SectionList from "../pages/secure/academic/SectionList";
 import SubjectList from "../pages/secure/academic/SubjectList";
 import StaffAttendence from "../pages/secure/attendence/staff/StaffAttendence";
 import StudentAttendence from "../pages/secure/attendence/student/StudentAttendence";
+import NoticeList from "../pages/secure/notice/NoticeList";
 import StudentForm from "../pages/secure/Student/StudentForm";
 import StudentList from "../pages/secure/Student/StudentList";
 import TeacherForm from "../pages/secure/teacher/TeacherForm";
@@ -55,6 +57,14 @@ const ClientsRoutes = () => {
           element={
             <React.Suspense fallback={<Loader />}>
               <Contact />
+            </React.Suspense>
+          }
+        />
+        <Route
+          path="notice-board"
+          element={
+            <React.Suspense fallback={<Loader />}>
+              <NoticeBoard />
             </React.Suspense>
           }
         />
@@ -105,6 +115,14 @@ const ClientsRoutes = () => {
             element={
               <React.Suspense fallback={<Loader />}>
                 <SubjectList />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="notice"
+            element={
+              <React.Suspense fallback={<Loader />}>
+                <NoticeList />
               </React.Suspense>
             }
           />

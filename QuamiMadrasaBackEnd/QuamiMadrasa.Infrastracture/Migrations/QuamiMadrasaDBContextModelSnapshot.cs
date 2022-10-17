@@ -55,21 +55,21 @@ namespace QuamiMadrasa.Infrastracture.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "aca0e5fe-1691-4d6e-ae6a-65496a63e69c",
+                            ConcurrencyStamp = "22dfcc59-d323-4433-a3dc-51fc4abe9a62",
                             Name = "Admin",
                             NormalizedName = "Administrator"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "de5a4bbf-e1dd-4098-b357-f6626c864ed7",
+                            ConcurrencyStamp = "d7da6772-6660-45f4-8668-cf980f6a526a",
                             Name = "Teacher",
                             NormalizedName = "Teacher"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "6ab81c99-1e44-4f0b-acff-7a9e4ceccb94",
+                            ConcurrencyStamp = "638fa77e-4957-4fd5-9cad-c08f50ba2f13",
                             Name = "Accountant",
                             NormalizedName = "Accountant"
                         });
@@ -171,7 +171,7 @@ namespace QuamiMadrasa.Infrastracture.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5e4e84cd-f719-4206-80f2-87ce285d75b6",
+                            ConcurrencyStamp = "17d1c760-2ceb-4c97-a2e4-6ac3aff4d555",
                             Email = "admin@madrasha.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -186,7 +186,7 @@ namespace QuamiMadrasa.Infrastracture.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c97ab921-dd72-4cf2-a83a-037ccdf94090",
+                            ConcurrencyStamp = "31b16148-d425-48c0-8cbe-56e0b2f2e870",
                             Email = "teacher01@madrasha.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -200,7 +200,7 @@ namespace QuamiMadrasa.Infrastracture.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "49158e18-51e3-4edb-ae90-45a264f623b4",
+                            ConcurrencyStamp = "f253076c-16a9-4449-91df-72632c80eb95",
                             Email = "accountant01@madrasha.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -678,6 +678,42 @@ namespace QuamiMadrasa.Infrastracture.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Nationalities");
+                });
+
+            modelBuilder.Entity("QuamiMadrasa.Core.Entities.Notice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FromDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsPublished")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ToDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notices");
                 });
 
             modelBuilder.Entity("QuamiMadrasa.Core.Entities.Payment", b =>

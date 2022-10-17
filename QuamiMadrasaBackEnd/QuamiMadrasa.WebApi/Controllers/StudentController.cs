@@ -116,6 +116,16 @@ namespace QuamiMadrasa.WebApi.Controllers
 
         }
 
+        [HttpPut]
+        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Route("UpdateClass")]
+        public async Task<ActionResult> UpdateClass(MyClass myClass)
+        {
+            var stud = await _myClassRepository.UpdateClass(myClass);
+
+            return Ok(stud);
+        }
+
         [HttpGet]
         //[Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("GetSections")]
@@ -145,6 +155,16 @@ namespace QuamiMadrasa.WebApi.Controllers
 
         }
 
+        [HttpPut]
+        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Route("UpdateSection")]
+        public async Task<ActionResult> UpdateSection(Section section)
+        {
+            var stud = await _sectionRepository.UpdateSection(section);
+
+            return Ok(stud);
+        }
+
         [HttpGet]
         //[Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("GetSubjects")]
@@ -172,6 +192,16 @@ namespace QuamiMadrasa.WebApi.Controllers
                 return StatusCode(500, ex.Message);
             }
 
+        }
+
+        [HttpPut]
+        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Route("UpdateSubject")]
+        public async Task<ActionResult> UpdateSubject(Subject subject)
+        {
+            var stud = await _subjectRepository.UpdateSubject(subject);
+
+            return Ok(stud);
         }
     }
 }

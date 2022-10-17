@@ -123,7 +123,7 @@ const Admin = (props: any) => {
                   },
                   {
                     title: 'নোটিশ বোর্ড',
-                    itemId: '/management/hs1',
+                    itemId: '/admin-dashboard/notice',
                     elemBefore: () => <Icon name="bi-megaphone" />
                   },
                   {
@@ -212,7 +212,7 @@ const Admin = (props: any) => {
                       {
                         title: 'Heads',
                         itemId: '/management/xasb2501',
-                        elemBefore: () => <Icon name="bi-diagram" />
+                        elemBefore: () => <Icon name="bi-app-indicator" />
                       },
                       {
                         title: 'Budgets',

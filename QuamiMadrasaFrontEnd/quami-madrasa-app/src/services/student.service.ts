@@ -21,5 +21,9 @@ class StudentService {
     return axios.post(API_URL + 'CreateStudent',data, { headers: authHeader() });
   }
 
+  updateStudent(data:any) {
+    return axios.put(API_URL + 'UpdateStudent',data, { headers: authHeader() });
+  }
+
 }
 export default new StudentService();
