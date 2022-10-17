@@ -21,7 +21,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
         
         [HttpGet]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("GetNotices")]
         public async Task<ActionResult> GetNotices()
         {
@@ -43,7 +43,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("GetNoticeById")]
         public async Task<ActionResult> GetNoticeById(int id)
         {
@@ -53,7 +53,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpPut]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("UpdateNotice")]
         public async Task<ActionResult> UpdateNotice(Notice  Notice)
         {
@@ -63,7 +63,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpDelete]
-        //[Authorize(Roles = "Administrator,Teacher")]
+        [Authorize(Roles = "Administrator,Teacher")]
         [Route("DeleteNotice")]
         public async Task<ActionResult> DeleteNotice(int id)
         {
@@ -73,7 +73,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("CreateNotice")]
         public async Task<ActionResult> CreateNotice(Notice notice)
         {

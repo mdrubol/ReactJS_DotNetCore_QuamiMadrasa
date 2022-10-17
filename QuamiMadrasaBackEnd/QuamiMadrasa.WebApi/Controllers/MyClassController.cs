@@ -21,7 +21,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
         
         [HttpGet]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("GetMyClasses")]
         public async Task<ActionResult> GetMyClasses()
         {
@@ -31,7 +31,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("GetMyClassById")]
         public async Task<ActionResult> GetMyClassById(int id)
         {
@@ -41,7 +41,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpPut]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("UpdateMyClass")]
         public async Task<ActionResult> UpdateMyClass(MyClass  myClass)
         {
@@ -51,7 +51,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpDelete]
-        //[Authorize(Roles = "Administrator,Teacher")]
+        [Authorize(Roles = "Administrator,Teacher")]
         [Route("DeleteMyClass")]
         public async Task<ActionResult> DeleteMyClass(int id)
         {
@@ -61,7 +61,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("CreateMyClass")]
         public async Task<ActionResult> CreateMyClass(MyClassDto myClass)
         {

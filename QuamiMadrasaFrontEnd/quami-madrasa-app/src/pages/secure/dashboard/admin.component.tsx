@@ -211,7 +211,7 @@ const Admin = (props: any) => {
                     subNav: [
                       {
                         title: 'Heads',
-                        itemId: '/management/xasb2501',
+                        itemId: '/admin-dashboard/heads',
                         elemBefore: () => <Icon name="bi-app-indicator" />
                       },
                       {

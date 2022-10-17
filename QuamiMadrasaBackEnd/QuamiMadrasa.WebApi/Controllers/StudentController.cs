@@ -29,7 +29,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
         
         [HttpGet]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("GetStudents")]
         public async Task<ActionResult> GetStudents()
         {
@@ -39,7 +39,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("GetStudentById")]
         public async Task<ActionResult> GetStudentById(int id)
         {
@@ -49,7 +49,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpPut]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("UpdateStudent")]
         public async Task<ActionResult> UpdateStudent(Student student)
         {
@@ -59,7 +59,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpDelete]
-        //[Authorize(Roles = "Administrator,Teacher")]
+        [Authorize(Roles = "Administrator,Teacher")]
         [Route("DeleteStudent")]
         public async Task<ActionResult> DeleteStudent(int id)
         {
@@ -69,7 +69,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("CreateStudent")]
         public async Task<ActionResult> CreateStudent(StudentDto student)
         {
@@ -88,7 +88,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("GetClasses")]
         public async Task<ActionResult> GetClasses()
         {
@@ -98,7 +98,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("CreateClass")]
         public async Task<ActionResult> CreateClass(MyClassDto  classDto)
         {
@@ -117,7 +117,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpPut]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("UpdateClass")]
         public async Task<ActionResult> UpdateClass(MyClass myClass)
         {
@@ -127,7 +127,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("GetSections")]
         public async Task<ActionResult> GetSections()
         {
@@ -137,7 +137,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("CreateSection")]
         public async Task<ActionResult> CreateSection(Section section)
         {
@@ -156,7 +156,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpPut]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("UpdateSection")]
         public async Task<ActionResult> UpdateSection(Section section)
         {
@@ -166,7 +166,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("GetSubjects")]
         public async Task<ActionResult> GetSubjects()
         {
@@ -195,7 +195,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpPut]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("UpdateSubject")]
         public async Task<ActionResult> UpdateSubject(Subject subject)
         {

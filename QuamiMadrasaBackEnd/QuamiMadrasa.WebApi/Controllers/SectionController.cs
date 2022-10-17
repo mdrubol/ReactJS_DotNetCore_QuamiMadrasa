@@ -21,7 +21,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
         
         [HttpGet]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("GetSections")]
         public async Task<ActionResult> GetSections()
         {
@@ -31,7 +31,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("GetSectionById")]
         public async Task<ActionResult> GetSectionById(int id)
         {
@@ -41,7 +41,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpPut]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("UpdateSection")]
         public async Task<ActionResult> UpdateSection(Section  section)
         {
@@ -51,7 +51,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpDelete]
-        //[Authorize(Roles = "Administrator,Teacher")]
+        [Authorize(Roles = "Administrator,Teacher")]
         [Route("DeleteSection")]
         public async Task<ActionResult> DeleteSection(int id)
         {
@@ -61,7 +61,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("CreateSection")]
         public async Task<ActionResult> CreateSection(SectionDto student)
         {

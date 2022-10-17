@@ -12,8 +12,8 @@ using QuamiMadrasa.Infrastracture.Data;
 namespace QuamiMadrasa.Infrastracture.Migrations
 {
     [DbContext(typeof(QuamiMadrasaDBContext))]
-    [Migration("20221017074845_initial")]
-    partial class initial
+    [Migration("20221017124614_the")]
+    partial class the
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -52,29 +52,6 @@ namespace QuamiMadrasa.Infrastracture.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ConcurrencyStamp = "22dfcc59-d323-4433-a3dc-51fc4abe9a62",
-                            Name = "Admin",
-                            NormalizedName = "Administrator"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ConcurrencyStamp = "d7da6772-6660-45f4-8668-cf980f6a526a",
-                            Name = "Teacher",
-                            NormalizedName = "Teacher"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ConcurrencyStamp = "638fa77e-4957-4fd5-9cad-c08f50ba2f13",
-                            Name = "Accountant",
-                            NormalizedName = "Accountant"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -167,51 +144,6 @@ namespace QuamiMadrasa.Infrastracture.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "17d1c760-2ceb-4c97-a2e4-6ac3aff4d555",
-                            Email = "admin@madrasha.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "admin@madrasha.com",
-                            NormalizedUserName = "Admin",
-                            PasswordHash = "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "Admin"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "31b16148-d425-48c0-8cbe-56e0b2f2e870",
-                            Email = "teacher01@madrasha.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "teacher01@madrasha.com",
-                            PasswordHash = "cde383eee8ee7a4400adf7a15f716f179a2eb97646b37e089eb8d6d04e663416",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "teacher01"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "f253076c-16a9-4449-91df-72632c80eb95",
-                            Email = "accountant01@madrasha.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "accountant01@madrasha.com",
-                            PasswordHash = "4d393ec34c3c6a875b95e66df5e6d6fc09efc33d66f12e3e98afca347d6b7638",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "accountant01"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
@@ -272,33 +204,6 @@ namespace QuamiMadrasa.Infrastracture.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = 1,
-                            RoleId = 1
-                        },
-                        new
-                        {
-                            UserId = 1,
-                            RoleId = 2
-                        },
-                        new
-                        {
-                            UserId = 1,
-                            RoleId = 3
-                        },
-                        new
-                        {
-                            UserId = 2,
-                            RoleId = 2
-                        },
-                        new
-                        {
-                            UserId = 3,
-                            RoleId = 3
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
@@ -365,18 +270,6 @@ namespace QuamiMadrasa.Infrastracture.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ClassType");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Physical Class"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Online Class"
-                        });
                 });
 
             modelBuilder.Entity("QuamiMadrasa.Core.Entities.EmployeeType", b =>
@@ -528,6 +421,36 @@ namespace QuamiMadrasa.Infrastracture.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Grades");
+                });
+
+            modelBuilder.Entity("QuamiMadrasa.Core.Entities.Head", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDebit")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Heads");
                 });
 
             modelBuilder.Entity("QuamiMadrasa.Core.Entities.Hostel", b =>
@@ -1077,8 +1000,7 @@ namespace QuamiMadrasa.Infrastracture.Migrations
 
                     b.HasIndex("MyClassId");
 
-                    b.HasIndex("TeacherId")
-                        .IsUnique();
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("Subjects");
                 });
@@ -1272,8 +1194,8 @@ namespace QuamiMadrasa.Infrastracture.Migrations
                         .IsRequired();
 
                     b.HasOne("QuamiMadrasa.Core.Entities.Staff", "Teacher")
-                        .WithOne()
-                        .HasForeignKey("QuamiMadrasa.Core.Entities.Subject", "TeacherId")
+                        .WithMany()
+                        .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

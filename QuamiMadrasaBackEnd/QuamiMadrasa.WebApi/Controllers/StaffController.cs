@@ -21,7 +21,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
         
         [HttpGet]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("Getstaffs")]
         public async Task<ActionResult> Getstaffs()
         {
@@ -31,7 +31,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("GetstaffById")]
         public async Task<ActionResult> GetStaffById(int id)
         {
@@ -41,7 +41,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpPut]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("UpdateStaff")]
         public async Task<ActionResult> UpdateStaff(Staff staff)
         {
@@ -51,7 +51,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpDelete]
-        //[Authorize(Roles = "Administrator,Teacher")]
+        [Authorize(Roles = "Administrator,Teacher")]
         [Route("DeleteStaff")]
         public async Task<ActionResult> DeleteStaff(int id)
         {
@@ -61,7 +61,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("CreateStaff")]
         public async Task<ActionResult> CreateStaff(StaffDto staff)
         {
@@ -80,7 +80,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("GetAllTeachers")]
         public async Task<ActionResult> GetAllTeachers()
         {
@@ -90,7 +90,7 @@ namespace QuamiMadrasa.WebApi.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("GetEmployeeTypes")]
         public async Task<ActionResult> GetEmployeeTypes()
         {
