@@ -35,7 +35,7 @@ const Header = () => {
   return (
     <Navbar bg="light-" expand="lg">
       <Container fluid>
-        <Navbar.Brand>কওমি মাদ্রাসা</Navbar.Brand>
+        <Navbar.Brand>জামিআ ফারুকিয়া এমদাদুল উলূম(মাদরাসা)</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -54,9 +54,6 @@ const Header = () => {
             <Nav.Link as={NavLink} to="/contact2">
               আমাদের সম্পর্কে
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/contact3">
-              কার্যক্রম
-            </Nav.Link>
             <NavDropdown title="ফর্ম সমূহ" id="basic-nav-dropdown">
               <NavDropdown.Item as={NavLink} to="/SS">
                 ভর্তি ফরম
@@ -70,9 +67,6 @@ const Header = () => {
             </NavDropdown>
             <Nav.Link as={NavLink} to="/notice-board">
               নোটিশ বোর্ড
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/contact5">
-              রেজাল্ট আর্কাইভ
             </Nav.Link>
             <Nav.Link as={NavLink} to="/contact6">
               যোগাযোগ
