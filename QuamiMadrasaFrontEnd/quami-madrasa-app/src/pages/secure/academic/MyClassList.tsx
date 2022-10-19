@@ -10,12 +10,12 @@ import academicService from "../../../services/academic.service";
 
 const columns: TableColumn<MyClass>[] = [
   {
-    name: "Id",
+    name: "আই.ডি",
     selector: (row: MyClass) => row.id,
     sortable: true
   },
   {
-    name: "Name",
+    name: "জামাত",
     selector: (row: MyClass) => row.name,
     sortable: true,
   },
@@ -95,7 +95,7 @@ function MyClassList() {
 
   let toolbarParams:ToolbarParams = {
      ExportExcelSettings:{
-      fileName:'teachers',
+      fileName:'জামাত সমূহের তালিকা',
       dataSet:rowData,
       //excelColDefs:[{header:"ID",key:"id"},{header:"Title",key:"title"},{header:"Director",key:"director"}] //or
        excelColDefs: getExcelColDefs(columns) //or pass null or undefined to get automatic excel
@@ -117,7 +117,7 @@ function MyClassList() {
   }
 
   let params: GridParams<MyClass> = {
-    gridTitle: "Teachers",
+    gridTitle: "জামাত সমূহের তালিকা",
     defaultSortFieldId: 2,
     data: rowData,
     columnDefs: columns,

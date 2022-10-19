@@ -10,6 +10,7 @@ import NoticeBoard from "../pages/public/notice/NoticeBoard";
 import MyClassList from "../pages/secure/academic/MyClassList";
 import SectionList from "../pages/secure/academic/SectionList";
 import SubjectList from "../pages/secure/academic/SubjectList";
+import FeesCollection from "../pages/secure/accounting/feesCollection";
 import HeadList from "../pages/secure/accounting/HeadList";
 import StaffAttendence from "../pages/secure/attendence/staff/StaffAttendence";
 import StudentAttendence from "../pages/secure/attendence/student/StudentAttendence";
@@ -133,6 +134,14 @@ const ClientsRoutes = () => {
             element={
               <React.Suspense fallback={<Loader />}>
                 <HeadList />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="fees-collection"
+            element={
+              <React.Suspense fallback={<Loader />}>
+                <FeesCollection />
               </React.Suspense>
             }
           />

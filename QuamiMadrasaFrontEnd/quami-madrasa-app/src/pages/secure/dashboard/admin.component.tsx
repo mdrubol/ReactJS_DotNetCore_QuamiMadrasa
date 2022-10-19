@@ -205,7 +205,7 @@ const Admin = (props: any) => {
                     ]
                   },
                   {
-                    title: 'Account',
+                    title: 'Accounting',
                     itemId: '#7',
                     elemBefore: () => <Icon name="bi-bank" />,
                     subNav: [
@@ -221,7 +221,7 @@ const Admin = (props: any) => {
                       },
                       {
                         title: 'Fees',
-                        itemId: '/management/fdf',
+                        itemId: '/admin-dashboard/fees-collection',
                         elemBefore: () => <Icon name="bi-journal-check" />
                       },
                       {

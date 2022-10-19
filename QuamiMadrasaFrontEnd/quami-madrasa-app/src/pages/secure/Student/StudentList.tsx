@@ -9,28 +9,28 @@ import Student from "../../../models/student.model";
 import studentService from "../../../services/student.service";
 
 const columns: TableColumn<Student>[] = [
-  {
+/*   {
     name: "Id",
     selector: (row: Student) => row.id,
     sortable: true
-  },
+  }, */
   {
-    name: "Class",
+    name: "জামাত",
     selector: (row: Student) => row.myClass.name,
     sortable: true,
   },
-  {
+ /*  {
     name: "Section",
     selector: (row: Student) => row.section.name,
     sortable: true,
-  },
+  }, */
   {
-    name: "Admission No",
+    name: "ফরম নং",
     selector: (row: Student) => row.admNo,
     sortable: true,
   },
   {
-    name: "Age",
+    name: "বয়স",
     selector: (row: Student) => row.age,
     sortable: true
   },
