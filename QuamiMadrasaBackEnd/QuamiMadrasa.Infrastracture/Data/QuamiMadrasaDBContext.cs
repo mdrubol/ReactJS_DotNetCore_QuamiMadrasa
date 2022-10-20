@@ -23,6 +23,7 @@ namespace QuamiMadrasa.Infrastracture.Data
         public DbSet<Exam> Exams { get; set; }
         public DbSet<ExamRecord> ExamRecords { get; set; }
         public DbSet<Grade> Grades { get; set; }
+        public DbSet<Guardian>  Guardians { get; set; }
         public DbSet<Hostel> Hostels { get; set; }
         public DbSet<Mark> Marks { get; set; }
         public DbSet<MyClass> Classes { get; set; }
