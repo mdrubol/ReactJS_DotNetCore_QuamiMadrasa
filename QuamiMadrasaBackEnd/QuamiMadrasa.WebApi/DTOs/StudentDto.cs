@@ -15,6 +15,7 @@ namespace QuamiMadrasa.WebApi.DTOs
         public string AdmNo { get; set; }
 
         public int? MyParentId { get; set; }
+        public Guardian Guardian { get; set; }
 
         public int? HostelId { get; set; }
 

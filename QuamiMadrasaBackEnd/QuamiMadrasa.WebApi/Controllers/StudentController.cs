@@ -17,14 +17,17 @@ namespace QuamiMadrasa.WebApi.Controllers
         private readonly IMyClassRepository _myClassRepository;
         private readonly ISectionRepository _sectionRepository;
         private readonly ISubjectRepository _subjectRepository;
+        private readonly IGuardianRepository _guardianRepository;
         public StudentController(IStudentRepository studentRepository,
             ISectionRepository sectionRepository, ISubjectRepository subjectRepository,
+            IGuardianRepository guardianRepository,
             IMyClassRepository myClassRepository, IMapper mapper)
         {
             _studentRepository = studentRepository;
             _myClassRepository = myClassRepository;
             _sectionRepository = sectionRepository;
-            _subjectRepository = subjectRepository; 
+            _subjectRepository = subjectRepository;
+            _guardianRepository = guardianRepository;
             _mapper = mapper;
         }
         
@@ -85,6 +88,13 @@ namespace QuamiMadrasa.WebApi.Controllers
         {
             try
             {
+                var guardian = await _guardianRepository.AddGuardian(student.Guardian);
+
+                if(guardian != null)
+                {
+                    student.MyParentId = guardian?.Id;
+                }
+
                 var stud = await _studentRepository.AddStudent(_mapper.Map<Student>(student));
 
                 return Ok(stud);

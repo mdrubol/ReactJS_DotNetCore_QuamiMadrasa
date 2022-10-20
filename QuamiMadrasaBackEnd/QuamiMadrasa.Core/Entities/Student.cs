@@ -15,8 +15,8 @@ namespace QuamiMadrasa.Core.Entities
         public int MyClassId { get; set; }
         public MyClass MyClass { get; set; }    
 
-        public int SectionId { get; set; }
-        public Section Section { get; set; }
+        //public int SectionId { get; set; }
+        //public Section Section { get; set; }
 
         public string AdmNo { get; set; }
 

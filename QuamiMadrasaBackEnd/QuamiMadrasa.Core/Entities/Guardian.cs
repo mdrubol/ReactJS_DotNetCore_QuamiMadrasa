@@ -11,5 +11,6 @@ namespace QuamiMadrasa.Core.Entities
         public string FullName { get; set; }
         public string MobileNo { get; set; }
         public string Address { get; set; }
+        public string Relationship { get; set; }
     }
 }

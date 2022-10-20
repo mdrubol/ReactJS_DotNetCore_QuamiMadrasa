@@ -43,7 +43,7 @@ namespace QuamiMadrasa.Infrastracture.Repositories
         public async Task<List<Student>> GetAllStudents()
         {
             var students = await _quamiMadrasaContext.Students.Include(s => s.MyClass)
-                .Include(s => s.Section).Include(s => s.Hostel).ToListAsync();
+                .Include(s => s.Hostel).ToListAsync();
 
             return students;
         }
@@ -60,7 +60,6 @@ namespace QuamiMadrasa.Infrastracture.Repositories
             var stu = await _genericRepository.GetByIdAsync(student.Id);
 
             stu.Session = student.Session;
-            stu.SectionId = student.SectionId;
             stu.HostelRoomNo = student.HostelRoomNo;
             stu.AdmNo = student.AdmNo;
             stu.Age = student.Age;

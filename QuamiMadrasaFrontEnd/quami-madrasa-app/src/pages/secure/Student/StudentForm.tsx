@@ -4,114 +4,122 @@ import axios from 'axios';
 import studentService from '../../../services/student.service';
 import { useFormik } from 'formik';
 
-const StudentForm=() =>{
-    const [classList,setClassList]  = useState([]);
-    const [sectionList,setSectionList]  = useState([]);
+const StudentForm = () => {
+    const [classList, setclassNameList] = useState([]);
+    const [sectionList, setSectionList] = useState([]);
 
     useEffect(() => {
-        studentService.getAllClasses().then(resp=>{
-            setClassList(resp.data);
+        studentService.getAllClasses().then(resp => {
+            setclassNameList(resp.data);
         });
-    
-        studentService.getAllSections().then(resp=>{
+
+        studentService.getAllSections().then(resp => {
             setSectionList(resp.data);
         });
-    },[]);
-    
+    }, []);
+
 
 
     const formik = useFormik({
         initialValues: {
             myClassId: 0,
+            fullName: '',
             sectionId: 0,
             admNo: '',
             myParentId: null,
-            hostelId:null,
-            hostelRoomNo:'',
-            session:'',
-            house:'',
-            age:0,
-            yearAdmitted:''
+            hostelId: null,
+            hostelRoomNo: '',
+            session: '',
+            attendenceStatus:'P',
+            house: '',
+            age: 0,
+            yearAdmitted: '',
+            guardian : {
+                fullName:'',
+                mobileNo:'',
+                relationship:'',
+                address:''
+            }
         },
         onSubmit: values => {
-          //alert(JSON.stringify(values, null, 2));
-          studentService.addStudent(values).then(resp=>{
-                console.log('successfully saved',resp.data);
-          });
+            //alert(JSON.stringify(values, null, 2));
+            studentService.addStudent(values).then(resp => {
+                console.log('successfully saved', resp.data);
+            });
         },
-      });
+    });
 
 
-        return (
-            <>
-                <Container>
-                    <Row>
-                        <Col md={6} >
-                            <Form onSubmit={formik.handleSubmit}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Class</Form.Label>
+    return (
+        <>
+            <Container>
+                <div className="col-md-7 col-lg-8 mt-3">
+                    <h4 className="mb-3">শিক্ষার্থীর তথ্য</h4>
+                    <form onSubmit={formik.handleSubmit} className="needs-validation" noValidate>
+                        <div className="row g-3">
+                            <div className="col-sm-6">
+                                <label htmlFor="firstName" className="form-label">শিক্ষার্থীর নাম</label>
+                                <input type="text" name='fullName' className="form-control" onChange={formik.handleChange} id="firstName" value={formik.values.fullName} />
+                            </div>
+
+                            <Form.Group className="mb-3 col-md-6">
+                                    <Form.Label>জামাত</Form.Label>
                                     <Form.Select name='myClassId' aria-label="Default select example" onChange={formik.handleChange}
-                                    value={formik.values.myClassId}>
+                                        value={formik.values.myClassId}>
                                         <option>Please Select </option>
                                         {
-                                            classList.map((v:any,i:number)=>{
-                                                return <option key={i+'_cls'} value={v.id}>{v.name}</option>
+                                            classList.map((v: any, i: number) => {
+                                                return <option key={i + '_cls'} value={v.id}>{v.name}</option>
                                             })
                                         }
-                                    
+
                                     </Form.Select>
                                 </Form.Group>
 
-                                <Form.Group className="mb-3" >
-                                    <Form.Label>Section</Form.Label>
-                                    <Form.Select name='sectionId' aria-label="Default select example" onChange={formik.handleChange}
-                                    value={formik.values.sectionId}>
-                                        <option>Please Select </option>
-                                        {
-                                            sectionList.map((v:any,i:number)=>{
-                                                return <option key={i+'_sec'} value={v.id}>{v.name}</option>
-                                            })
-                                        }
-                                    
-                                    </Form.Select>
-                                </Form.Group>
+                            <Form.Group className="mb-3 col-sm-6" controlId="formBasicPassword">
+                                <Form.Label>ফরম নং</Form.Label>
+                                <Form.Control name='admNo' type="text" placeholder="adm no" onChange={formik.handleChange}
+                                    value={formik.values.admNo} />
+                            </Form.Group>
 
-                                <Form.Group className="mb-3" controlId="formBasicPassword">
-                                    <Form.Label>Adm No.</Form.Label>
-                                    <Form.Control name='admNo' type="text" placeholder="adm no" onChange={formik.handleChange}
-                                    value={formik.values.admNo}/>
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicPassword">
-                                    <Form.Label>Hostel Room No.</Form.Label>
-                                    <Form.Control name='hostelRoomNo' type="text" placeholder="room no" onChange={formik.handleChange}
-                                    value={formik.values.hostelRoomNo}/>
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicPassword">
-                                    <Form.Label>Session.</Form.Label>
-                                    <Form.Control type="text" name='session' placeholder="session" onChange={formik.handleChange}
-                                    value={formik.values.session}/>
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicPassword">
-                                    <Form.Label>Age</Form.Label>
-                                    <Form.Control type="number" name='age' placeholder="age" onChange={formik.handleChange}
-                                    value={formik.values.age}/>
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicPassword">
-                                    <Form.Label>Admitted Year</Form.Label>
-                                    <Form.Control type="text" name='yearAdmitted' placeholder="admitted year" onChange={formik.handleChange}
-                                    value={formik.values.yearAdmitted}/>
-                                </Form.Group>
-                                <Button variant="primary" type="submit">
-                                    Submit
-                                </Button>
-                            </Form>
-                        </Col>
-                    </Row>
+                            <Form.Group className="mb-3 col-sm-6" controlId="formBasicPassword">
+                                <Form.Label>বোর্ডিং নং</Form.Label>
+                                <Form.Control name='hostelRoomNo' type="text" placeholder="room no" onChange={formik.handleChange}
+                                    value={formik.values.hostelRoomNo} />
+                            </Form.Group>
 
-                </Container>
-            </>
-        );
-    }
+
+                            <Form.Group className="mb-3 col-sm-6" >
+                                <Form.Label>অভিভাবকের নাম</Form.Label>
+                                <Form.Control type="text" name='guardian.fullName' onChange={formik.handleChange}
+                                    value={formik.values.guardian.fullName} />
+                            </Form.Group>
+                            <Form.Group className="mb-3 col-sm-6" >
+                                <Form.Label>সম্পর্ক</Form.Label>
+                                <Form.Control type="text" name='guardian.relationship' onChange={formik.handleChange}
+                                    value={formik.values.guardian.relationship} />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3 col-sm-6" controlId="formBasicPassword334">
+                                <Form.Label>মোবাইল নং</Form.Label>
+                                <Form.Control type="text" name='guardian.mobileNo' onChange={formik.handleChange}
+                                    value={formik.values.guardian.mobileNo} />
+                            </Form.Group>
+                            <Form.Group className="mb-3 col-sm-6" >
+                                <Form.Label>ঠিকানা</Form.Label>
+                                <Form.Control type="text" name='guardian.address' onChange={formik.handleChange}
+                                    value={formik.values.guardian.address} />
+                            </Form.Group>
+                        </div>
+
+                        <button className="w-100 btn btn-primary btn-lg" type="submit">সংরক্ষণ করুন</button>
+                    </form>
+                </div>
+
+            </Container>
+        </>
+    );
+}
 
 
 export default StudentForm;
