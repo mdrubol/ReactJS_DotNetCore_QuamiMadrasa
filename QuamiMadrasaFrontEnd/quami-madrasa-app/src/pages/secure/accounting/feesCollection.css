@@ -2,6 +2,12 @@
     max-width: 460px;
     margin: 4rem auto;
   }
+
+  .scrollable{
+    max-height: 450px;
+    overflow-y: scroll;
+
+  }
   
   .form-check-input:checked + .form-checked-content {
     opacity: .5;

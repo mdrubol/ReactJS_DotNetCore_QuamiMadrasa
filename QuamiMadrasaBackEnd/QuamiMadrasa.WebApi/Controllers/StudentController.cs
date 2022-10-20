@@ -40,6 +40,16 @@ namespace QuamiMadrasa.WebApi.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Administrator,Teacher,Accountant")]
+        [Route("GetStudentsByClassId")]
+        public async Task<ActionResult> GetStudentsByClassId(int classId)
+        {
+            var students = await _studentRepository.GetAllStudents();
+
+            return Ok(students.Where(s=> s.MyClassId == classId).ToList());
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Administrator,Teacher,Accountant")]
         [Route("GetStudentById")]
         public async Task<ActionResult> GetStudentById(int id)
         {
