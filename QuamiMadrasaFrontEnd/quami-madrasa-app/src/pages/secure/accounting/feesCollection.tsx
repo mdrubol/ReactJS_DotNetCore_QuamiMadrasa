@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Row, Table } from 'react-bootstrap';
+import toastr from 'toastr';
 import { Formik, useFormik } from 'formik';
 import academicService from "../../../services/academic.service";
 import studentService from '../../../services/student.service';
+import accountingService from '../../../services/accounting.service';
 import './feesCollection.css';
+
+
 
 
 const getTodayDate = () => {
@@ -11,8 +15,8 @@ const getTodayDate = () => {
     const yyyy = today.getFullYear();
     let mm: number = today.getMonth() + 1; // Months start at 0!
     let dd: number = today.getDate();
-    let d ='';
-    let m ='';
+    let d = '';
+    let m = '';
 
     if (dd < 10)
         d = '0' + dd;
@@ -28,7 +32,7 @@ const FeesCollection = () => {
     const [jamatRowData, setJamatRowData] = useState([]);
     const [studentData, setStudentData] = useState([]);
     const [selectedStudent, setSelectedStudent] = useState({} as any);
-    const [total,setTotal] = useState(0);
+    const [total, setTotal] = useState(0);
 
     useEffect(() => {
 
@@ -43,7 +47,7 @@ const FeesCollection = () => {
     const formik = useFormik({
         initialValues: {
             myClassId: 0,
-            jamat:'',
+            jamat: '',
             formNo: 0,
             fullName: '',
             admissionFee: 0,
@@ -55,10 +59,16 @@ const FeesCollection = () => {
             tcFee: 0,
             generatorFee: 0,
             date: getTodayDate(),
-            etc:0
+            etc: 0,
+            total: 0
         },
         onSubmit: values => {
             console.log(JSON.stringify(values, null, 2));
+            values.total = total;
+            accountingService.saveFeesCollection(values).then((resp: any) => {
+                console.log('saved successfully');
+                toastr.success('Saved Successfully!', "Success", { timeOut: 5000, "closeButton": false, });
+            });
         },
     });
 
@@ -72,20 +82,19 @@ const FeesCollection = () => {
         formik.values.fullName = selectedStu.fullName;
         formik.values.myClassId = selectedStu.myClassId;
         formik.values.formNo = selectedStu.admNo;
-        formik.values.jamat = (jamatRowData.find((p:any)=> p.id == selectedStu.myClassId) as any).name;
+        formik.values.jamat = (jamatRowData.find((p: any) => p.id == selectedStu.myClassId) as any).name;
         setSelectedStudent(selectedStu);
     }
 
-    const handleOnBlur = (e:any) => {
+    const handleOnBlur = (e: any) => {
         console.log(e.currentTarget.value);
-        let total = formik.values.admissionFee + formik.values.charecterCertFee 
-        + formik.values.etc + formik.values.examFee +
-        formik.values.generatorFee + formik.values.reAdmissionFee+
-        formik.values.salaryFee + formik.values.tcFee+
-        formik.values.transportFee;
+        let total = Number(formik.values.admissionFee) + Number(formik.values.charecterCertFee)
+            + Number(formik.values.etc) + Number(formik.values.examFee) +
+            Number(formik.values.generatorFee) + Number(formik.values.reAdmissionFee) +
+            Number(formik.values.salaryFee) + Number(formik.values.tcFee) +
+            Number(formik.values.transportFee);
 
-        setTotal(total)
-        
+        setTotal(total);
     }
 
     return (
@@ -137,7 +146,7 @@ const FeesCollection = () => {
                                 <input type="text" onChange={formik.handleChange} disabled className="form-control" value={formik.values.jamat} required />
                             </div>
 
-                            <input type="hidden" value={formik.values.myClassId}/>
+                            <input type="hidden" value={formik.values.myClassId} />
 
                             <div className="col-sm-6">
                                 <label htmlFor="lastName" className="form-label">ফরম নং</label>
@@ -159,47 +168,47 @@ const FeesCollection = () => {
                                 <tr>
                                     <td>১</td>
                                     <td>ভর্তি ফরম</td>
-                                    <td><input type="number" name='admissionFee' value={formik.values.admissionFee} onBlur={(e) => handleOnBlur(e)} onChange={formik.handleChange} /></td>
+                                    <td><input type="text" name='admissionFee' value={formik.values.admissionFee} onBlur={(e) => handleOnBlur(e)} onChange={formik.handleChange} /></td>
                                 </tr>
                                 <tr>
                                     <td>২</td>
                                     <td>ভর্তি/পুনঃ ভর্তি ফি </td>
-                                    <td><input type="number" name='reAdmissionFee' value={formik.values.reAdmissionFee} onBlur={(e) => handleOnBlur(e)} onChange={formik.handleChange} /></td>
+                                    <td><input type="text" name='reAdmissionFee' value={formik.values.reAdmissionFee} onBlur={(e) => handleOnBlur(e)} onChange={formik.handleChange} /></td>
                                 </tr>
                                 <tr>
                                     <td>৩</td>
                                     <td>বেতন </td>
-                                    <td><input type="number" name='salaryFee' value={formik.values.salaryFee} onBlur={(e) => handleOnBlur(e)} onChange={formik.handleChange} /></td>
+                                    <td><input type="text" name='salaryFee' value={formik.values.salaryFee} onBlur={(e) => handleOnBlur(e)} onChange={formik.handleChange} /></td>
                                 </tr>
                                 <tr>
                                     <td>৪</td>
                                     <td>পরিবহন ভাড়া </td>
-                                    <td><input type="number" name='transportFee' value={formik.values.transportFee} onBlur={(e) => handleOnBlur(e)} onChange={formik.handleChange} /></td>
+                                    <td><input type="text" name='transportFee' value={formik.values.transportFee} onBlur={(e) => handleOnBlur(e)} onChange={formik.handleChange} /></td>
                                 </tr>
                                 <tr>
                                     <td>৫</td>
                                     <td>পরীক্ষার ফি /পাঠোন্নতির বিবরণ</td>
-                                    <td><input type="number" name='examFee' value={formik.values.examFee} onBlur={(e) => handleOnBlur(e)}  onChange={formik.handleChange} /></td>
+                                    <td><input type="text" name='examFee' value={formik.values.examFee} onBlur={(e) => handleOnBlur(e)} onChange={formik.handleChange} /></td>
                                 </tr>
                                 <tr>
                                     <td>৬</td>
                                     <td>সনদ/প্রশংসা পত্র </td>
-                                    <td><input type="number" name='charecterCertFee' value={formik.values.charecterCertFee} onBlur={(e) => handleOnBlur(e)} onChange={formik.handleChange} /></td>
+                                    <td><input type="text" name='charecterCertFee' value={formik.values.charecterCertFee} onBlur={(e) => handleOnBlur(e)} onChange={formik.handleChange} /></td>
                                 </tr>
                                 <tr>
                                     <td>৭</td>
                                     <td>টি সি /প্রত্যয়ন পত্র </td>
-                                    <td><input type="number" onBlur={(e) => handleOnBlur(e)} name='tcFee' value={formik.values.tcFee} onChange={formik.handleChange} /></td>
+                                    <td><input type="text" onBlur={(e) => handleOnBlur(e)} name='tcFee' value={formik.values.tcFee} onChange={formik.handleChange} /></td>
                                 </tr>
                                 <tr>
                                     <td>৮</td>
                                     <td>বিদ্যুৎ /জেনারেটর </td>
-                                    <td><input type="number" onBlur={(e) => handleOnBlur(e)} name='generatorFee' value={formik.values.generatorFee} onChange={formik.handleChange} /></td>
+                                    <td><input type="text" onBlur={(e) => handleOnBlur(e)} name='generatorFee' value={formik.values.generatorFee} onChange={formik.handleChange} /></td>
                                 </tr>
                                 <tr>
                                     <td>৯</td>
                                     <td>বিবিধ</td>
-                                    <td><input type="number" onBlur={(e) => handleOnBlur(e)} name='etc' value={formik.values.etc} onChange={formik.handleChange} /></td>
+                                    <td><input type="text" onBlur={(e) => handleOnBlur(e)} name='etc' value={formik.values.etc} onChange={formik.handleChange} /></td>
                                 </tr>
                                 <tr>
                                     <td></td>

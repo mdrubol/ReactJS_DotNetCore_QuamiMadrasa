@@ -3,6 +3,8 @@ import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import axios from 'axios';
 import studentService from '../../../services/student.service';
 import { useFormik } from 'formik';
+import toastr from 'toastr';
+
 
 const StudentForm = () => {
     const [classList, setclassNameList] = useState([]);
@@ -45,6 +47,7 @@ const StudentForm = () => {
             //alert(JSON.stringify(values, null, 2));
             studentService.addStudent(values).then(resp => {
                 console.log('successfully saved', resp.data);
+                toastr.success('Saved Successfully!', "Success", { timeOut: 5000, "closeButton": false, });
             });
         },
     });

@@ -8,7 +8,9 @@ class AccountingService {
     return axios.get(API_URL + 'GetHeads', { headers: authHeader() });
   }
 
- 
+  saveFeesCollection(data:any) {
+    return axios.post(API_URL + 'CreateReceipt',data, { headers: authHeader() });
+  }
 
 }
 export default new AccountingService();
