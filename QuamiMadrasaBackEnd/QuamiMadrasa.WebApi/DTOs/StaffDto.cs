@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using QuamiMadrasa.Core.Entities;
+﻿using QuamiMadrasa.Core.Entities;
 
 namespace QuamiMadrasa.WebApi.DTOs
 {

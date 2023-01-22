@@ -8,33 +8,21 @@
 
   <ItemGroup>
     <Compile Remove="Config\**" />
-    <Compile Remove="Migrations\**" />
+    <Compile Remove="MigrationsT\**" />
     <EmbeddedResource Remove="Config\**" />
-    <EmbeddedResource Remove="Migrations\**" />
+    <EmbeddedResource Remove="MigrationsT\**" />
     <None Remove="Config\**" />
-    <None Remove="Migrations\**" />
+    <None Remove="MigrationsT\**" />
   </ItemGroup>
 
 	<ItemGroup>
 		<Compile Remove="Repositories\ProductRepository.cs" />
 	</ItemGroup>
+
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.0">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0" />
-		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.16.0" />
-		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.16.0" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.2" />
 	</ItemGroup>
+	
 	<ItemGroup>
 	  <ProjectReference Include="..\QuamiMadrasa.Core\QuamiMadrasa.Core.csproj" />
 	</ItemGroup>

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuamiMadrasa.Infrastracture.Data;
 
@@ -11,9 +12,10 @@ using QuamiMadrasa.Infrastracture.Data;
 namespace QuamiMadrasa.Infrastracture.Migrations
 {
     [DbContext(typeof(QuamiMadrasaDBContext))]
-    partial class QuamiMadrasaDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230122094609_DBGenm")]
+    partial class DBGenm
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -421,6 +423,41 @@ namespace QuamiMadrasa.Infrastracture.Migrations
                     b.ToTable("Grades");
                 });
 
+            modelBuilder.Entity("QuamiMadrasa.Core.Entities.Guardian", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MobileNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Relationship")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Guardians");
+                });
+
             modelBuilder.Entity("QuamiMadrasa.Core.Entities.Head", b =>
                 {
                     b.Property<int>("Id")
@@ -781,23 +818,50 @@ namespace QuamiMadrasa.Infrastracture.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AmtPaid")
-                        .HasColumnType("int");
+                    b.Property<decimal>("AdmissionFee")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("Balance")
-                        .HasColumnType("int");
+                    b.Property<decimal>("CharecterCertFee")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PrId")
+                    b.Property<decimal>("ExamFee")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("GeneratorFee")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("JamatId")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("MiscFee")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ReAdmissionFee")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ReceiptDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReceiptNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("SalaryFee")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TcFee")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TransportFee")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Year")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -942,9 +1006,6 @@ namespace QuamiMadrasa.Infrastracture.Migrations
                     b.Property<int?>("MyParentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SectionId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Session")
                         .HasColumnType("nvarchar(max)");
 
@@ -962,8 +1023,6 @@ namespace QuamiMadrasa.Infrastracture.Migrations
                     b.HasIndex("HostelId");
 
                     b.HasIndex("MyClassId");
-
-                    b.HasIndex("SectionId");
 
                     b.ToTable("Students");
                 });
@@ -1170,17 +1229,9 @@ namespace QuamiMadrasa.Infrastracture.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("QuamiMadrasa.Core.Entities.Section", "Section")
-                        .WithMany()
-                        .HasForeignKey("SectionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Hostel");
 
                     b.Navigation("MyClass");
-
-                    b.Navigation("Section");
                 });
 
             modelBuilder.Entity("QuamiMadrasa.Core.Entities.Subject", b =>
